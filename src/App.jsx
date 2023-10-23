@@ -1,10 +1,12 @@
 import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 
 function App() {
   return(
-    <div className="dark:bg-neutral-900">
-      <Header></Header>
-    </div>
+    <>
+      <Navbar/>
+      <Header/>
+    </>
   );
 }
 
