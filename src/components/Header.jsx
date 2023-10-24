@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <section className="py-24 flex items-center min-h-screen justify-center bg-neutral-900">
+    <section className="flex items-center min-h-screen justify-center bg-neutral-900">
       <div className="text-center w-full mx-auto">
         <div className="text-center">
           <p className="text-lg font-medium leading-8 text-purple-500">Introducing Crypto Portfolio</p>
