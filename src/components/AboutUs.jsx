@@ -2,8 +2,8 @@
 
 const AboutUs = () => {
   return (
-    <main className="py-12 bg-gray-100">
-      <div className="container mx-auto">
+    <main className="py-24 bg-gray-100">
+      <div className="container mx-auto px-4 py-12">
         <div className="text-center py-4">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark mb-4">
             What We Offer

@@ -1,49 +1,108 @@
-import { useState } from 'react';
+import React from "react";
+import {
+  Navbar,
+  Collapse,
+  Typography,
+  IconButton,
+} from "@material-tailwind/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import myLogo from '../assets/logo.png';
 
-
-const Navbar = () => {
-  let Links = [
-    { name: 'Home', link: '/' },
-    { name: 'Services', link: '/' },
-    { name: 'Tracker', link: '/' },
-    { name: 'Contact', link: '/' },
-  ];
-  let [open, setOpen] = useState(false);
-
+ 
+function NavList() {
   return (
-    <nav className="w-full fixed top-0 left-0 bg-neutral-700 shadow-lg border-b border-purple-500 z-10">
-      <div className="md:flex items-center justify-between py-3 md:px-10 px-7">
-        <a className="logo flex items-center">
-          <img src={myLogo} alt="Company Logo" className="h-14 w-14" />
+    <ul className="my-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+          Home
         </a>
-
-        <div
-          onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden text-white"
-        >
-          <ion-icon name={open ? 'close' : 'menu'}></ion-icon>
-        </div>
-
-        <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-neutral-700 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? 'top-20 border-b border-purple-500' : 'top-[-490px]'
-          }`}
-        >
-          {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 font-medium md:my-0 my-7">
-              <a
-                href={link.link}
-                className="text-white hover:text-purple-400 duration-500"
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+          About
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+          Market
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+          Contact
+        </a>
+      </Typography>
+    </ul>
   );
-};
-
-export default Navbar;
+}
+ 
+export function NavbarSimple() {
+  const [openNav, setOpenNav] = React.useState(false);
+ 
+  const handleWindowResize = () =>
+    window.innerWidth >= 960 && setOpenNav(false);
+ 
+  React.useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+ 
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+ 
+  return (
+    <Navbar className="mx-auto max-w-screen-xl px-6 py-3 bg-neutral-800 border-purple-500">
+      <div className="flex items-center justify-between text-white">
+        <a className="logo flex items-center gap-2">
+          <img src={myLogo} alt="Company Logo" className="h-14 w-14" />
+          <Typography
+          as="p"
+          href="#"
+          variant="h6"
+          className="mr-4 cursor-pointer py-1.5"
+        >
+          CryptoTracker
+        </Typography>
+        </a>
+        <div className="hidden lg:block">
+          <NavList />
+        </div>
+        <IconButton
+          variant="text"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          ripple={false}
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+          ) : (
+            <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+          )}
+        </IconButton>
+      </div>
+      <Collapse open={openNav}>
+        <NavList />
+      </Collapse>
+    </Navbar>
+  );
+}
