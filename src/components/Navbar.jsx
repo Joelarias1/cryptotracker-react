@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -6,9 +6,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import myLogo from '../assets/logo.png';
 
- 
 function NavList() {
   return (
     <ul className="my-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -18,7 +16,10 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+        <a
+          href="#"
+          className="flex items-center hover:text-purple-400 transition-colors"
+        >
           Home
         </a>
       </Typography>
@@ -28,62 +29,34 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
+        <a
+          href="#"
+          className="flex items-center hover:text-purple-400 transition-colors"
+        >
           About
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
-          Market
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        <a href="#" className="flex items-center hover:text-purple-400 transition-colors">
-          Contact
         </a>
       </Typography>
     </ul>
   );
 }
- 
+
 export function NavbarSimple() {
-  const [openNav, setOpenNav] = React.useState(false);
- 
+  const [openNav, setOpenNav] = useState(false);
+
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
- 
-  React.useEffect(() => {
+
+  useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
- 
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
- 
+
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-6 py-3 bg-neutral-800 border-purple-500">
-      <div className="flex items-center justify-between text-white">
-        <a className="logo flex items-center gap-2">
-          <img src={myLogo} alt="Company Logo" className="h-14 w-14" />
-          <Typography
-          as="p"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5"
-        >
-          CryptoTracker
-        </Typography>
-        </a>
+    <Navbar className="h-max max-w-full px-6 py-4 fixed top-0 left-0 right-0 z-50 bg-transparent border-none rounded-none shadow-none">
+      <div className="flex items-center justify-center text-white">
         <div className="hidden lg:block">
           <NavList />
         </div>
