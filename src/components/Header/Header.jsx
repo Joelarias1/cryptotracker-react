@@ -1,7 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 import "./header.css";
-import videoSource from "../Header/bg-video.mp4";
 
 const Header = () => {
   const textVariants = ["Crypto", "NFT", "DeFi", "Market"];
@@ -30,25 +29,17 @@ const Header = () => {
 
   return (
     <motion.header
-      className="flex items-center min-h-screen justify-center relative"
+      className="flex items-center min-h-screen justify-center bg-zinc-850"
       initial="hidden"
       animate={controls}
       variants={motionVariants}
-    >
-      <video
-        className="absolute inset-0 w-full h-full object-cover object-center"
-        autoPlay
-        loop
-        muted
-      >
-        <source src={videoSource} type="video/mp4" />
-      </video>
+    > 
+
       <motion.div
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute flex items-center justify-center"
         variants={motionVariants}
       >
-        <div className="text-center w-full mx-auto px-4">
-          <div className="text-center">
+        <div className="text-center mx-auto px-4">
             <p className="text-xl font-bold leading-8 text-blue-300">
               Introducing Crypto Portfolio
             </p>
@@ -69,26 +60,18 @@ const Header = () => {
               Stay informed about your cryptocurrency investments with our
               all-in-one crypto tracking solution.
             </motion.p>
-          </div>
 
           <motion.div
             className="mt-6 flex items-center justify-center gap-10"
             variants={motionVariants}
           >
-            <motion.a
+            <motion.button
               href="#"
-              className="transform rounded-md bg-blue-500 px-5 py-3 font-medium text-white"
-              whileHover={{ scale: 1.05, backgroundColor: "#7643ea" }}
+              className="rounded-md bg-blue-700 px-16 py-3 font-medium text-white"
+              whileHover={{ scale: 1.15 }}
             >
               Get started for free
-            </motion.a>
-            <motion.a
-              href="#"
-              className="transform rounded-md border border-blue-500 px-5 py-3 font-medium text-white"
-              whileHover={{ scale: 1.2, borderColor: "#7643ea" }}
-            >
-              Request a demo
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
       </motion.div>

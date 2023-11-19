@@ -4,12 +4,15 @@ import {
   Collapse,
   Typography,
   IconButton,
+  Button,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import myLogo from '../assets/logo2.png';
+
 
 function NavList() {
   return (
-    <ul className="my-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="my-8 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -23,6 +26,7 @@ function NavList() {
           Home
         </a>
       </Typography>
+
       <Typography
         as="li"
         variant="small"
@@ -36,11 +40,48 @@ function NavList() {
           About
         </a>
       </Typography>
+
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a
+          href="#"
+          className="flex items-center hover:text-purple-400 transition-colors"
+        >
+          Market
+        </a>
+      </Typography>
+
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <a
+          href="#"
+          className="flex items-center hover:text-purple-400 transition-colors"
+        >
+          Contact
+        </a>
+      </Typography>
+      <li className="p-1 font-medium">
+        <SubscribeButton />
+      </li>
     </ul>
   );
 }
 
-export function NavbarSimple() {
+const SubscribeButton = () => (
+  <Button color="blue-gray" ripple="light" className="mt-4 lg:mt-0 lg:ml-auto bg-blue-600">
+    Subscribe
+  </Button>
+);
+
+export const NavbarSimple = () => {
   const [openNav, setOpenNav] = useState(false);
 
   const handleWindowResize = () =>
@@ -54,9 +95,20 @@ export function NavbarSimple() {
     };
   }, []);
 
+
   return (
-    <Navbar className="h-max max-w-full px-6 py-4 fixed top-0 left-0 right-0 z-50 bg-transparent border-none rounded-none shadow-none">
-      <div className="flex items-center justify-center text-white">
+    <Navbar className="h-max max-w-full px-6 py-3 fixed z-50 rounded-none bg-zinc-850 border-none shadow-none">
+      <div className="flex items-center justify-between text-white">
+        <a className="flex items-center gap-2" href="#"> 
+            <img
+              className="w-auto h-11" 
+              src={myLogo}
+              alt="Logo of CryptoTracker"
+            />
+            <h3 className="text-2xl font-bold leading-none">
+              Crypto<span className="text-blue-500">Tracker</span>
+            </h3>
+          </a>
         <div className="hidden lg:block">
           <NavList />
         </div>
@@ -78,4 +130,4 @@ export function NavbarSimple() {
       </Collapse>
     </Navbar>
   );
-}
+};

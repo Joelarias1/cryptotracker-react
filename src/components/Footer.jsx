@@ -1,4 +1,4 @@
-import myLogo from '../assets/logo.png';
+import myLogo from '../assets/logo2.png';
 
 
 const Footer = () => {
@@ -82,24 +82,6 @@ const Footer = () => {
 
         <hr class="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
-        <sect class="flex items-center justify-between">
-          <a href="#">
-            <img
-              class="w-auto h-7"
-              src={myLogo}
-              alt="Logo of CryptoTracker"
-            />
-            
-          </a>
-
-          <div class="flex -mx-2">
-            <a
-              href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-              aria-label="Github"
-            ></a>
-          </div>
-        </sect>
       </div>
     </footer>
   );
