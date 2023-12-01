@@ -21,7 +21,7 @@ function NavList() {
       >
         <a
           href="#"
-          className="flex items-center hover:text-purple-400 transition-colors"
+          className="flex items-center hover:text-blue-400 transition-colors"
         >
           Home
         </a>
@@ -35,7 +35,7 @@ function NavList() {
       >
         <a
           href="#"
-          className="flex items-center hover:text-purple-400 transition-colors"
+          className="flex items-center hover:text-blue-400 transition-colors"
         >
           About
         </a>
@@ -49,7 +49,7 @@ function NavList() {
       >
         <a
           href="#"
-          className="flex items-center hover:text-purple-400 transition-colors"
+          className="flex items-center hover:text-blue-400 transition-colors"
         >
           Market
         </a>
@@ -63,7 +63,7 @@ function NavList() {
       >
         <a
           href="#"
-          className="flex items-center hover:text-purple-400 transition-colors"
+          className="flex items-center hover:text-blue-400 transition-colors"
         >
           Contact
         </a>
@@ -76,7 +76,7 @@ function NavList() {
 }
 
 const SubscribeButton = () => (
-  <Button color="blue-gray" ripple="light" className="mt-4 lg:mt-0 lg:ml-auto bg-blue-600">
+  <Button ripple="light" className="mt-4 lg:mt-0 lg:ml-auto bg-blue-600">
     Subscribe
   </Button>
 );
