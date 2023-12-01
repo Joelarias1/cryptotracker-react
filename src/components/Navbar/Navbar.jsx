@@ -7,8 +7,9 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import myLogo from '../assets/logo2.png';
-
+import myLogo from "../../assets/logo2.png";
+import "./navbar.css";
+import { motion } from "framer-motion";
 
 function NavList() {
   return (
@@ -17,7 +18,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium li-hover"
       >
         <a
           href="#"
@@ -27,12 +28,7 @@ function NavList() {
         </a>
       </Typography>
 
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
+      <Typography as="li" variant="small" className="p-1 font-medium li-hover">
         <a
           href="#"
           className="flex items-center hover:text-blue-400 transition-colors"
@@ -45,7 +41,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium li-hover"
       >
         <a
           href="#"
@@ -59,7 +55,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium li-hover"
       >
         <a
           href="#"
@@ -76,9 +72,23 @@ function NavList() {
 }
 
 const SubscribeButton = () => (
-  <Button ripple="light" className="mt-4 lg:mt-0 lg:ml-auto bg-blue-600">
-    Subscribe
-  </Button>
+  <motion.div
+    whileTap={{
+      scale: 0.75,
+      borderRadius: "50%",
+    }}
+    whileHover={{
+      scale: 1.1,
+    }}
+    transition={{ duration: 0.2 }}
+  >
+    <Button
+      ripple="light"
+      className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
+    >
+      Subscribe
+    </Button>
+  </motion.div>
 );
 
 export const NavbarSimple = () => {
@@ -95,20 +105,19 @@ export const NavbarSimple = () => {
     };
   }, []);
 
-
   return (
     <Navbar className="h-max max-w-full px-6 py-3 fixed z-50 rounded-none bg-zinc-850 border-none shadow-none">
       <div className="flex items-center justify-between text-white">
-        <a className="flex items-center gap-2" href="#"> 
-            <img
-              className="w-auto h-11" 
-              src={myLogo}
-              alt="Logo of CryptoTracker"
-            />
-            <h3 className="text-2xl font-bold leading-none">
-              Crypto<span className="text-blue-500">Tracker</span>
-            </h3>
-          </a>
+        <a className="flex items-center gap-2" href="#">
+          <img
+            className="w-auto h-11"
+            src={myLogo}
+            alt="Logo of CryptoTracker"
+          />
+          <h3 className="text-2xl font-bold leading-none">
+            Crypto<span className="text-blue-500">Tracker</span>
+          </h3>
+        </a>
         <div className="hidden lg:block">
           <NavList />
         </div>

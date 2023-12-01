@@ -1,51 +1,48 @@
-import myLogo from '../assets/logo2.png';
-
+import { Button, Typography } from "@material-tailwind/react";
 
 const Footer = () => {
   return (
-    <footer class="bg-white dark:bg-gray-900">
-      <div class="container px-6 py-12 mx-auto">
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
-          <div class="sm:col-span-2">
-            <h1 class="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
-              Subscribe our newsletter to get update.
+    <footer className="bg-white">
+      <div className="container px-6 py-12 mx-auto">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
+          <div className="sm:col-span-2">
+            <h1 className="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
+              Subscribe our newsletter to get updates.
             </h1>
 
-            <div class="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
+            <div className="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
               <input
                 id="email"
                 type="text"
-                class="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 dark:focus:border-purple-300 focus:outline-none"
+                className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 dark:focus:border-purple-300 focus:outline-none"
                 placeholder="Email Address"
               />
 
-              <button class="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-purple-500 rounded-lg hover:bg-purple-300">
+              <Button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-blue-500 rounded-lg hover:bg-purple-300">
                 Subscribe
-              </button>
+              </Button>
             </div>
           </div>
 
           <section>
-            <p class="font-semibold text-gray-800 dark:text-white">
-              Quick Link
-            </p>
+            <p className="font-semibold text-gray-800 dark:text-white">Quick Links</p>
 
-            <div class="flex flex-col items-start mt-5 space-y-2">
+            <div className="flex flex-col items-start mt-5 space-y-2">
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Home
               </a>
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Tracker
               </a>
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Contact
               </a>
@@ -53,26 +50,24 @@ const Footer = () => {
           </section>
 
           <section>
-            <p class="font-semibold text-gray-800 dark:text-white">
-              Industries
-            </p>
+            <p className="font-semibold text-gray-800 dark:text-white">Industries</p>
 
-            <div class="flex flex-col items-start mt-5 space-y-2">
+            <div className="flex flex-col items-start mt-5 space-y-2">
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Crypto Currencies
               </a>
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Decentralized Finance <strong>(DeFi)</strong>
               </a>
               <a
                 href="#"
-                class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-purple-400 hover:underline hover:text-purple-500"
+                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Finance
               </a>
@@ -80,8 +75,14 @@ const Footer = () => {
           </section>
         </div>
 
-        <hr class="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
+        <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
+        <div className="flex items-center justify-center">
+          <Typography 
+          variant="small"
+          color="blue-gray"
+          className="text-black ml-4 font-medium">© 2023 CryptoTracker. All rights reserved.</Typography>
+        </div>
       </div>
     </footer>
   );
