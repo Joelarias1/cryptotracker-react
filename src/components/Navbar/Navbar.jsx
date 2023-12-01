@@ -6,10 +6,12 @@ import {
   IconButton,
   Button,
 } from "@material-tailwind/react";
+import { motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { DialogCustomAnimation } from "./Suscribe";
 import myLogo from "../../assets/logo2.png";
 import "./navbar.css";
-import { motion } from "framer-motion";
+
 
 function NavList() {
   return (
@@ -71,25 +73,40 @@ function NavList() {
   );
 }
 
-const SubscribeButton = () => (
-  <motion.div
-    whileTap={{
-      scale: 0.75,
-      borderRadius: "50%",
-    }}
-    whileHover={{
-      scale: 1.1,
-    }}
-    transition={{ duration: 0.2 }}
-  >
-    <Button
-      ripple="light"
-      className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
-    >
-      Subscribe
-    </Button>
-  </motion.div>
-);
+const SubscribeButton = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const handleOpen = () => setDialogOpen(!dialogOpen);
+
+  return (
+    <>
+      <motion.div
+        whileTap={{
+          scale: 0.75,
+          borderRadius: "50%",
+        }}
+        whileHover={{
+          scale: 1.1,
+        }}
+        transition={{ duration: 0.2 }}
+      >
+        <Button
+          type="lg"
+          ripple="light"
+          className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
+          onClick={handleOpen}
+        >
+          Subscribe
+        </Button>
+      </motion.div>
+
+      <DialogCustomAnimation isOpen={dialogOpen} handler={handleOpen}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: -100 },
+        }} />
+    </>
+  );
+};
 
 export const NavbarSimple = () => {
   const [openNav, setOpenNav] = useState(false);
