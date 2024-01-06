@@ -5,16 +5,22 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getGlobalData } from "../../api/main-api";
 
-export const AboutUs = () => {
+export const AboutUs = ({ name }) => {
   const [marketData, setMarketData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const marketdata = await getGlobalData();
-        setMarketData(marketdata);
+        // Simular tiempo de carga de 2 segundos
+        setTimeout(async () => {
+          const marketdata = await getGlobalData();
+          setMarketData(marketdata);
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         console.error("Error fetching market data:", error.message);
+        setLoading(false);
       }
     };
 
@@ -38,7 +44,7 @@ export const AboutUs = () => {
   }, [inView, controls]);
 
   return (
-    <section className="py-10 lg:py-20 bg-stone-100">
+    <section id={name} className="py-10 lg:py-20 bg-stone-100">
       <motion.div
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6"
         initial="hidden"
@@ -67,7 +73,7 @@ export const AboutUs = () => {
                   <div className="p-6 bg-white  border-b-4 border-blue-500">
                     <span className="text-blue-500 "></span>
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {marketData.activeCrypto || 0}
+                      {loading ? "Loading..." : marketData.activeCrypto || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Crypto Currencies
@@ -78,7 +84,7 @@ export const AboutUs = () => {
                   <div className="p-6 bg-white border-b-4 border-blue-500">
                     <span className="text-blue-500"></span>
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {marketData.markets|| 0}
+                      {loading ? "Loading..." : marketData.markets || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Markets
@@ -89,7 +95,7 @@ export const AboutUs = () => {
                   <div className="p-6 bg-white border-b-4 border-blue-500">
                     <span className="text-blue-50"></span>
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {marketData.totalExchanges || 0}
+                      {loading ? "Loading..." : marketData.totalExchanges || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Total Exchanges
@@ -100,7 +106,7 @@ export const AboutUs = () => {
                   <div className="p-6 bg-white border-b-4 border-blue-500">
                     <span className="text-blue-500 "></span>
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {marketData.icos || 0}
+                      {loading ? "Loading..." : marketData.icos || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Ongoing Icos

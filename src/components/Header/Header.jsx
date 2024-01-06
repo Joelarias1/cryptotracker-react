@@ -4,8 +4,9 @@ import "./header.css";
 import { Button } from "@material-tailwind/react";
 import Lottie from "lottie-react";
 import animation from "./animation.json";
+import { Link } from "react-scroll";
 
-const Header = () => {
+const Header = ({name}) => {
   const motionVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
@@ -23,6 +24,7 @@ const Header = () => {
       initial="hidden"
       animate={controls}
       variants={motionVariants}
+      id={name}
     >
       <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -35,12 +37,18 @@ const Header = () => {
               <span className="text-blue-500">Your Assets</span>
             </h1>
 
-            <Button
-              href="#"
-              className="bg-blue-600 px-12  text-sm font-medium uppercase leading-normal button-hover"
+            <Link
+              to="market"  // Nombre del elemento al que quieres dirigirte (usando el id)
+              spy={true}
+              smooth={true}
+              duration={500}
             >
-              Try Demo
-            </Button>
+              <Button
+                className="bg-blue-600 px-12  text-sm font-medium uppercase leading-normal button-hover"
+              >
+                Try Demo
+              </Button>
+            </Link>
           </div>
           <div className="mb-12 lg:mb-0">
             <Lottie

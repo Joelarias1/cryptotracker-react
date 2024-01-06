@@ -9,9 +9,9 @@ function App() {
   return(
     <div className="bg-neutral-900">
       <NavbarSimple/>
-      <Header/>
-      <AboutUs/>
-      <Table/>
+      <Header name="header"/>
+      <AboutUs name="about-us" />
+      <Table name="market" />
       <Footer/>
     </div>
   );

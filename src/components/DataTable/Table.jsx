@@ -1,4 +1,3 @@
-// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   Typography,
@@ -11,18 +10,30 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const TABLE_HEAD = ["Rank", "Crypto", "Price", "1h", "24h", "7d", "MarketCap"];
+const TABLE_HEAD = [
+  "Rank",
+  "Crypto",
+  "Price",
+  "1h",
+  "24h",
+  "7d",
+  "MarketCap",
+];
 
-export const Table = () => {
+export const Table = ({name}) => {
   const [coinsData, setCoinsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const coinsList = await getCoinsList();
         setCoinsData(coinsList);
       } catch (error) {
         console.error("Error fetching coins list:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -55,7 +66,7 @@ export const Table = () => {
   }, [inView, controls]);
 
   return (
-    <section className="py-10 lg:py-20 bg-zinc-50">
+    <section id={name} className="py-10 lg:py-20 bg-zinc-50">
       <motion.div
         initial="hidden"
         animate={controls}
@@ -86,110 +97,127 @@ export const Table = () => {
       </div> */}
 
         <div className="flex justify-center items-center mx-3">
-          <Card className="w-full xl:w-4/5">
-            <CardBody className="overflow-scroll">
-              <table className="w-full min-w-max table-auto text-left">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th
-                        key={head}
-                        className="border-y border-blue-gray-100 bg-zinc-50 p-4"
-                      >
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-bold leading-none opacity-70"
+          {loading ? (
+            // Mostrar el texto "Loading" mientras se cargan los datos
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-bold text-2xl"
+            >
+              Loading...
+            </Typography>
+          ) : (
+            <Card className="w-full xl:w-4/5">
+              <CardBody className="overflow-scroll">
+                <table className="w-full min-w-max table-auto text-left">
+                  <thead>
+                    <tr>
+                      {TABLE_HEAD.map((head) => (
+                        <th
+                          key={head}
+                          className="border-y border-blue-gray-100 bg-zinc-50 p-4"
                         >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {coinsData.map((coin) => (
-                    <tr key={coin.name}>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-light"
-                        >
-                          {coin.rank}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <Avatar
-                            src={coin.image}
-                            alt={coin.name}
-                            size="md"
-                            className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                          />
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-bold leading-none opacity-70"
+                          >
+                            {head}
+                          </Typography>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {coinsData.map((coin) => (
+                      <tr key={coin.name}>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-light"
+                          >
+                            {coin.rank}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <Avatar
+                              src={coin.image}
+                              alt={coin.name}
+                              size="md"
+                              className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                            />
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-medium"
+                            >
+                              {coin.name}
+                            </Typography>
+                          </div>
+                        </td>
+                        <td className="p-4">
                           <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-medium"
                           >
-                            {coin.name}
+                            {coin.currentPrice}
                           </Typography>
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          {coin.currentPrice}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          style={percentageValue(coin.priceChangePercentage1h)}
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          {coin.priceChangePercentage1h}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          style={percentageValue(coin.priceChangePercentage24h)}
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          {coin.priceChangePercentage24h}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          style={percentageValue(coin.priceChangePercentage7d)}
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          {coin.priceChangePercentage7d}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          {coin.marketcap}
-                        </Typography>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardBody>
-          </Card>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            style={percentageValue(
+                              coin.priceChangePercentage1h
+                            )}
+                            variant="small"
+                            color="blue-gray"
+                            className="font-medium"
+                          >
+                            {coin.priceChangePercentage1h}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            style={percentageValue(
+                              coin.priceChangePercentage24h
+                            )}
+                            variant="small"
+                            color="blue-gray"
+                            className="font-medium"
+                          >
+                            {coin.priceChangePercentage24h}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            style={percentageValue(
+                              coin.priceChangePercentage7d
+                            )}
+                            variant="small"
+                            color="blue-gray"
+                            className="font-medium"
+                          >
+                            {coin.priceChangePercentage7d}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-medium"
+                          >
+                            {coin.marketcap}
+                          </Typography>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </CardBody>
+            </Card>
+          )}
         </div>
       </motion.div>
     </section>

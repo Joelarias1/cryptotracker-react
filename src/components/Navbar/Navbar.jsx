@@ -11,6 +11,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { DialogCustomAnimation } from "./Suscribe";
 import myLogo from "../../assets/logo2.png";
 import "./navbar.css";
+import { Link } from 'react-scroll';
+
 
 
 function NavList() {
@@ -22,21 +24,25 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium li-hover"
       >
-        <a
-          href="#"
+        <Link
+          to="header"
+          smooth={true}
+          duration={500}
           className="flex items-center hover:text-blue-400 transition-colors"
         >
           Home
-        </a>
+        </Link>
       </Typography>
 
       <Typography as="li" variant="small" className="p-1 font-medium li-hover">
-        <a
-          href="#"
-          className="flex items-center hover:text-blue-400 transition-colors"
-        >
-          About
-        </a>
+        <Link
+            to="about-us"
+            smooth={true}
+            duration={500}
+            className="flex items-center hover:text-blue-400 transition-colors"
+          >
+            About Us
+          </Link>
       </Typography>
 
       <Typography
@@ -45,27 +51,16 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium li-hover"
       >
-        <a
-          href="#"
-          className="flex items-center hover:text-blue-400 transition-colors"
-        >
-          Market
-        </a>
+        <Link
+            to="market"
+            smooth={true}
+            duration={500}
+            className="flex items-center hover:text-blue-400 transition-colors"
+          >
+            Demo
+          </Link>
       </Typography>
 
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium li-hover"
-      >
-        <a
-          href="#"
-          className="flex items-center hover:text-blue-400 transition-colors"
-        >
-          Contact
-        </a>
-      </Typography>
       <li className="p-1 font-medium">
         <SubscribeButton />
       </li>

@@ -14,15 +14,10 @@ const handleApiResponse = async (response) => {
 };
 
 
-
-
 // Función para formatear porcentajes
 const formatPercentage = (percentage) => {
   return `${parseFloat(percentage).toFixed(2)} %`;
 };
-
-
-
 
 
 // Endpoints

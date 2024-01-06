@@ -2,6 +2,7 @@ import { Button, Typography } from "@material-tailwind/react";
 import { useEffect  } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
+import { Link } from "react-scroll";
 
 const Footer = () => {
   const motionVariants = {
@@ -55,24 +56,22 @@ const Footer = () => {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <a
-                href="#"
+              <Link
+                to="header"
+                smooth={true}
+                duration={500}
                 className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Home
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="market"
+                smooth={true}
+                duration={500}
                 className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
               >
                 Tracker
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 transition-colors duration-300 hover:text-blue-500"
-              >
-                Contact
-              </a>
+              </Link>
             </div>
           </section>
 
