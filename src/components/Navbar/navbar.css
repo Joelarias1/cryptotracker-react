@@ -1,3 +1,6 @@
 .li-hover:hover a {
     transform: scale(1.05);
+    -webkit-box-shadow:0px 0px 153px 5px rgba(46,81,255,0.9);
+    -moz-box-shadow: 0px 0px 153px 5px rgba(46,81,255,0.9);
+    box-shadow: 0px 0px 100px 10px rgba(46,81,255,0.9);
 }

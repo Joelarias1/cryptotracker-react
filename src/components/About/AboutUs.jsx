@@ -22,7 +22,7 @@ export const AboutUs = () => {
   }, [inView, controls]);
 
   return (
-    <section className="py-10 lg:py-20 bg-stone-100 font-poppins dark:bg-gray-800">
+    <section className="py-10 lg:py-20 bg-stone-100 dark:bg-gray-800">
       <motion.div
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6"
         initial="hidden"

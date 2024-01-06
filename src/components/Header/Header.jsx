@@ -19,35 +19,38 @@ const Header = () => {
 
   return (
     <motion.header
-      className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-zinc-850"
+      className="px-4 py-72 text-center md:px-12 lg:text-left"
       initial="hidden"
       animate={controls}
       variants={motionVariants}
     >
-      <div className="text-start lg:w-1/2 px-10 lg:order-1">
-        <p className="text-base md:text-lg lg:text-xl font-bold leading-tight text-blue-300">
-          Introducing Crypto Portfolio
-        </p>
-        <h1 className="mt-3 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-white">
-          Track Your <span className="text-blue-600">Crypto</span> Assets
-          <br /> in One Place
-        </h1>
-        <p className="mt-3 text-base sm:text-lg lg:text-xl text-start text-slate-400">
-          Stay informed about your cryptocurrency investments with our
-          all-in-one crypto tracking solution.
-        </p>
-        <div className="mt-6 flex justify-start">
-          <Button
-            href="#"
-            className="rounded-2xl bg-blue-700 px-8 sm:px-12 lg:px-16 py-3 font-medium text-white mt-2 button-hover"
-            ripple="light"
-          >
-            Get started
-          </Button>
+      <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="mt-12 lg:mt-0">
+            <p className="text-base md:text-lg lg:text-xl font-bold leading-tight mx-2 text-blue-300">
+              Introducing Crypto Portfolio
+            </p>
+            <h1 className="mt-0 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl text-slate-100">
+              Track on Real Time <br />
+              <span className="text-blue-500">Your Assets</span>
+            </h1>
+
+            <Button
+              href="#"
+              className="bg-blue-600 px-12  text-sm font-medium uppercase leading-normal button-hover"
+              ripple="light"
+            >
+              Try Demo
+            </Button>
+          </div>
+          <div className="mb-12 lg:mb-0">
+            <Lottie
+              animationData={animation}
+              className="w-full"
+              alt=""
+            />
+          </div>
         </div>
-      </div>
-      <div className="lg:w-3/4 xl:w-2/4 lg:order-2 ">
-        <Lottie animationData={animation} className="relative z-40 object-cover w-full h-full"/>
       </div>
     </motion.header>
   );

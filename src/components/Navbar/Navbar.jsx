@@ -90,7 +90,6 @@ const SubscribeButton = () => {
         transition={{ duration: 0.2 }}
       >
         <Button
-          type="lg"
           ripple="light"
           className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
           onClick={handleOpen}
@@ -123,7 +122,7 @@ export const NavbarSimple = () => {
   }, []);
 
   return (
-    <Navbar className="h-max max-w-full px-6 py-3 fixed z-50 rounded-none bg-zinc-850 border-none shadow-none">
+    <Navbar className="h-max max-w-full px-6 py-3 fixed z-50 rounded-none bg-neutral-900 border-none shadow-none">
       <div className="flex items-center justify-between text-white">
         <a className="flex items-center gap-2" href="#">
           <img
