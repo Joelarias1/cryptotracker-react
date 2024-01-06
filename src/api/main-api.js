@@ -75,7 +75,7 @@ export const getGlobalData = async () => {
     const globalResponse = await fetch(`${BASE_URL}/global?x_cg_demo_api_key=${API_KEY}`);
     const { data } = await handleApiResponse(globalResponse);
 
-    const exchangesResponse = await fetch(`${BASE_URL}/exchanges`);
+    const exchangesResponse = await fetch(`${BASE_URL}/exchanges?x_cg_demo_api_key=${API_KEY}`);
     
     if (!exchangesResponse.ok) {
       throw new Error(`Failed to fetch exchanges data. Status: ${exchangesResponse.status}`);

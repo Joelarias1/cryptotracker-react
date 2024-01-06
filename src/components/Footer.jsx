@@ -1,9 +1,34 @@
 import { Button, Typography } from "@material-tailwind/react";
+import { useEffect  } from "react";
+import { useInView } from "react-intersection-observer";
+import { motion, useAnimation } from "framer-motion";
 
 const Footer = () => {
+  const motionVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
+  };
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [inView, controls]);
+
   return (
     <footer className="bg-white">
-      <div className="container px-6 py-12 mx-auto">
+      <motion.div
+        className="container px-6 py-12 mx-auto"
+        initial="hidden"
+        animate={controls}
+        variants={motionVariants}
+        ref={ref}
+      >
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
           <div className="sm:col-span-2">
             <h1 className="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
@@ -25,7 +50,9 @@ const Footer = () => {
           </div>
 
           <section>
-            <p className="font-semibold text-gray-800 dark:text-white">Quick Links</p>
+            <p className="font-semibold text-gray-800 dark:text-white">
+              Quick Links
+            </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
               <a
@@ -50,7 +77,9 @@ const Footer = () => {
           </section>
 
           <section>
-            <p className="font-semibold text-gray-800 dark:text-white">Industries</p>
+            <p className="font-semibold text-gray-800 dark:text-white">
+              Industries
+            </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
               <a
@@ -78,12 +107,15 @@ const Footer = () => {
         <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
         <div className="flex items-center justify-center">
-          <Typography 
-          variant="small"
-          color="blue-gray"
-          className="text-black ml-4 font-medium">© 2023 CryptoTracker. All rights reserved.</Typography>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="text-black ml-4 font-medium"
+          >
+            © 2023 CryptoTracker. All rights reserved.
+          </Typography>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };
