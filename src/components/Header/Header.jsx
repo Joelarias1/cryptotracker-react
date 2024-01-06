@@ -38,7 +38,6 @@ const Header = () => {
             <Button
               href="#"
               className="bg-blue-600 px-12  text-sm font-medium uppercase leading-normal button-hover"
-              ripple="light"
             >
               Try Demo
             </Button>
@@ -47,7 +46,7 @@ const Header = () => {
             <Lottie
               animationData={animation}
               className="w-full"
-              alt=""
+              alt="team-animation"
             />
           </div>
         </div>

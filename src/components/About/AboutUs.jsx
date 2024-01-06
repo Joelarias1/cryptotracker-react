@@ -22,7 +22,7 @@ export const AboutUs = () => {
   }, [inView, controls]);
 
   return (
-    <section className="py-10 lg:py-20 bg-stone-100 dark:bg-gray-800">
+    <section className="py-10 lg:py-20 bg-stone-100">
       <motion.div
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6"
         initial="hidden"
@@ -34,10 +34,10 @@ export const AboutUs = () => {
           <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0 ">
             <div className="lg:max-w-md">
               <div className="px-4 pl-4 mb-6 border-l-4 border-blue-500">
-                <span className="text-sm font-bold text-gray-600 uppercase dark:text-gray-400">
+                <span className="text-sm font-bold text-gray-600 uppercase ">
                   Who we are?
                 </span>
-                <h1 className="mt-2 text-3xl font-black text-gray-700 md:text-5xl dark:text-gray-300">
+                <h1 className="mt-2 text-3xl font-black text-gray-700 md:text-5xl ">
                   About Us
                 </h1>
               </div>
@@ -48,7 +48,7 @@ export const AboutUs = () => {
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <div className="p-6 bg-white dark:bg-gray-900 border-b-4 border-blue-500">
                     <span className="text-blue-500 dark:text-blue-400"></span>
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 dark:text-gray-400">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                     DATA
                     </p>
                     <h2 className="text-sm text-gray-700 dark:text-gray-400">
@@ -59,7 +59,7 @@ export const AboutUs = () => {
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <div className="p-6 bg-white dark:bg-gray-900 border-b-4 border-blue-500">
                     <span className="text-blue-500 dark:text-blue-400"></span>
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 dark:text-gray-400">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                     DATA
                     </p>
                     <h2 className="text-sm text-gray-700 dark:text-gray-400">
@@ -70,7 +70,7 @@ export const AboutUs = () => {
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <div className="p-6 bg-white dark:bg-gray-900 border-b-4 border-blue-500">
                     <span className="text-blue-500 dark:text-blue-400"></span>
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 dark:text-gray-400">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                     DATA
                     </p>
                     <h2 className="text-sm text-gray-700 dark:text-gray-400">
@@ -81,10 +81,10 @@ export const AboutUs = () => {
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <div className="p-6 bg-white dark:bg-gray-900 border-b-4 border-blue-500">
                     <span className="text-blue-500 dark:text-blue-400"></span>
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 dark:text-gray-400">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       DATA
                     </p>
-                    <h2 className="text-sm text-gray-700 dark:text-gray-400">
+                    <h2 className="text-sm text-gray-700 ">
                       Text 4
                     </h2>
                   </div>
