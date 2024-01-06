@@ -1,10 +1,10 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   Typography,
   CardBody,
   Avatar,
-  Input,
+  // Input,
 } from "@material-tailwind/react";
 import { getCoinsList } from "../../api/main-api";
 import { useEffect, useState } from "react";
@@ -29,28 +29,22 @@ export const Table = () => {
 
   const percentageValue = (value) => {
     const numericValue = parseFloat(value);
-
-    if (numericValue > 0) {
-      return { color: "green" };
-    } else if (numericValue < 0) {
-      return { color: "red" };
-    } else {
-      return {}; // Sin color si es cero
-    }
+    return numericValue > 0 ? { color: "green" } : numericValue < 0 ? { color: "red" } : {};
   };
+  
 
   return (
     <section className="py-10 lg:py-20 bg-zinc-50">
       <div className="flex flex-col items-center justify-center px-4 mb-6">
         <h1 className="mt-2 text-3xl font-black text-gray-700 md:text-5xl">
-          Check Our App
+          Check Our Demo
         </h1>
         <p className="mt-3 text-base md:text-lg lg:text-xl text-center text-slate-500">
-          You can search multiple assets across the market
+          See the most important assets across the market
         </p>
       </div>
 
-      <div className="mb-4 flex flex-col justify-center md:flex-row md:items-center mx-5">
+      {/* <div className="mb-4 flex flex-col justify-center md:flex-row md:items-center mx-5">
         <div className="flex w-full shrink-0 gap-2 md:w-max">
           <div className="w-full md:w-96">
             <Input
@@ -62,7 +56,7 @@ export const Table = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-center items-center mx-3">
         <Card className="w-full xl:w-4/5">

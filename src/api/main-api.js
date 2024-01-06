@@ -13,13 +13,20 @@ const handleApiResponse = async (response) => {
   return data;
 };
 
+
+
+
 // Función para formatear porcentajes
 const formatPercentage = (percentage) => {
   return `${parseFloat(percentage).toFixed(2)} %`;
 };
 
+
+
+
+
 // Endpoints
-// Top 10 List
+
 export const getCoinsList = async () => {
   try {
     const response = await fetch(
@@ -58,3 +65,33 @@ export const getCoinsList = async () => {
     throw error;
   }
 };
+
+
+
+// Market Data
+
+export const getGlobalData = async () => {
+  try {
+    const globalResponse = await fetch(`${BASE_URL}/global?x_cg_demo_api_key=${API_KEY}`);
+    const { data } = await handleApiResponse(globalResponse);
+
+    const exchangesResponse = await fetch(`${BASE_URL}/exchanges`);
+    
+    if (!exchangesResponse.ok) {
+      throw new Error(`Failed to fetch exchanges data. Status: ${exchangesResponse.status}`);
+    }
+
+    const totalExchanges = exchangesResponse.headers.get('total');
+
+    return {
+      activeCrypto: data.active_cryptocurrencies.toLocaleString(),
+      markets: data.markets.toLocaleString(),
+      totalExchanges: totalExchanges ? parseInt(totalExchanges) : 0,
+      icos: data.ongoing_icos.toLocaleString(),
+    };
+  } catch (error) {
+    console.error(`Error in getGlobalData: ${error.message}`);
+    throw error;
+  }
+};
+
