@@ -40,7 +40,7 @@ const Footer = () => {
               <input
                 id="email"
                 type="text"
-                className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 dark:focus:border-purple-300 focus:outline-none"
+                className="px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-purple-400 dark:focus:border-purple-300 focus:outline-none"
                 placeholder="Email Address"
               />
 
@@ -76,7 +76,7 @@ const Footer = () => {
           </section>
 
           <section>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-gray-800">
               Industries
             </p>
 
@@ -103,7 +103,7 @@ const Footer = () => {
           </section>
         </div>
 
-        <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
+        <hr className="my-6 border-gray-200 md:my-8" />
 
         <div className="flex items-center justify-center">
           <Typography
