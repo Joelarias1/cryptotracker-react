@@ -32,7 +32,7 @@ const Footer = () => {
       >
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
           <div className="sm:col-span-2">
-            <h1 className="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
+            <h1 className="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl">
               Subscribe our newsletter to get updates.
             </h1>
 
@@ -40,7 +40,7 @@ const Footer = () => {
               <input
                 id="email"
                 type="text"
-                className="px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-purple-400 dark:focus:border-purple-300 focus:outline-none"
+                className="px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-purple-400  focus:outline-none"
                 placeholder="Email Address"
               />
 
@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
 
           <section>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-gray-800">
               Quick Links
             </p>
 
