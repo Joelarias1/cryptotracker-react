@@ -67,6 +67,8 @@ export const AboutUs = ({ name }) => {
                 This is a demo project created for my portfolio showcasing
                 real-time cryptocurrency prices. The project involves consuming
                 an API to dynamically display up-to-date crypto prices.
+
+                Credits to CoinGecko for provide the API.
               </p>
               <div className="flex flex-wrap items-center">
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
