@@ -27,10 +27,16 @@ export const AboutUs = ({ name }) => {
     fetchData();
   }, []);
 
-  const motionVariants = {
+  const sectionAnimation = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
   };
+
+  const cardsAnimation = {
+    scale: 1.08,
+    transition: { duration: 0.3 },
+  };
+
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -49,7 +55,7 @@ export const AboutUs = ({ name }) => {
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6"
         initial="hidden"
         animate={controls}
-        variants={motionVariants}
+        variants={sectionAnimation}
         ref={ref}
       >
         <div className="flex flex-wrap ">
@@ -65,55 +71,65 @@ export const AboutUs = ({ name }) => {
               </div>
               <p className="px-4 mb-10 text-base leading-7 text-gray-500 dark:text-gray-400">
                 This is a demo project created for my portfolio showcasing
-                real-time cryptocurrency prices. The project involves consuming
-                an API to dynamically display up-to-date crypto prices.
-
-                Credits to CoinGecko for provide the API.
+                real-time cryptocurrency prices.
+                <br />
+                <br />
+                The project involves consuming an API to dynamically display
+                up-to-date crypto prices. Credits to CoinGecko for provide the
+                API.
               </p>
               <div className="flex flex-wrap items-center">
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                  <div className="p-6 bg-white  border-b-4 border-blue-500">
-                    <span className="text-blue-500 "></span>
+                  <motion.div
+                    className="p-6 bg-white  border-b-4 border-blue-500"
+                    whileHover={cardsAnimation}
+                  >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.activeCrypto || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Crypto Currencies
                     </h2>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                  <div className="p-6 bg-white border-b-4 border-blue-500">
-                    <span className="text-blue-500"></span>
+                  <motion.div
+                    className="p-6 bg-white border-b-4 border-blue-500"
+                    whileHover={cardsAnimation}
+                  >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.markets || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Markets
                     </h2>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                  <div className="p-6 bg-white border-b-4 border-blue-500">
-                    <span className="text-blue-50"></span>
+                  <motion.div
+                    className="p-6 bg-white border-b-4 border-blue-500"
+                    whileHover={cardsAnimation}
+                  >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.totalExchanges || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Total Exchanges
                     </h2>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
-                  <div className="p-6 bg-white border-b-4 border-blue-500">
-                    <span className="text-blue-500 "></span>
+                  <motion.div
+                    className="p-6 bg-white border-b-4 border-blue-500"
+                    whileHover={cardsAnimation}
+                  >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.icos || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-normal">
                       Ongoing Icos
                     </h2>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>

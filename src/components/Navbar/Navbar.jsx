@@ -22,24 +22,24 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-medium li-hover"
+        className="p-1 font-medium"
       >
         <Link
           to="header"
           smooth={true}
           duration={500}
-          className="flex items-center hover:text-blue-400 transition-colors"
+          className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
         >
           Home
         </Link>
       </Typography>
 
-      <Typography as="li" variant="small" className="p-1 font-medium li-hover">
+      <Typography as="li" variant="small" className="p-1 font-medium">
         <Link
             to="about-us"
             smooth={true}
             duration={500}
-            className="flex items-center hover:text-blue-400 transition-colors"
+            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
           >
             About Us
           </Link>
@@ -49,13 +49,13 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-medium li-hover"
+        className="p-1 font-medium"
       >
         <Link
             to="market"
             smooth={true}
             duration={500}
-            className="flex items-center hover:text-blue-400 transition-colors"
+            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105" 
           >
             Demo
           </Link>
@@ -85,7 +85,7 @@ const SubscribeButton = () => {
         transition={{ duration: 0.2 }}
       >
         <Button
-          ripple="light"
+          ripple
           className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
           onClick={handleOpen}
         >

@@ -45,6 +45,7 @@ const Header = ({name}) => {
             >
               <Button
                 className="bg-blue-600 px-12  text-sm font-medium uppercase leading-normal button-hover"
+                ripple
               >
                 Try Demo
               </Button>
