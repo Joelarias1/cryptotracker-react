@@ -6,11 +6,11 @@ It is mainly a Single Page Application where it will show the prices of differen
 
 ## Roadmap 👀
 
-- Define color schemes, logos, and site design scheme ✔
+- Define color schemes, logos, and site design scheme ✅ 
 
-- Create an attractive header related to the area ✔
+- Create an attractive header related to the area ✅ 
 
-- Show test prices ❌ (Soon)
+- Show prices ✅ 
 
 - Create cryptocurrency search engine ❌ (Soon)
 
@@ -18,17 +18,24 @@ It is mainly a Single Page Application where it will show the prices of differen
 
 ## Screenshots 🎞
 
-[![front-page](https://i.postimg.cc/zfgHZsSh/front-1.png)](https://postimg.cc/5Hf28kr9)
+[![front-page.png](https://i.postimg.cc/G37pqqL2/1.png)](https://postimg.cc/4ncZ3vhk)
 
 [![whitelist.png](https://i.postimg.cc/cCHsZYyz/2.png)](https://postimg.cc/62ksf8QV)
+
+[![aboutus.png](https://i.postimg.cc/5ND2MyFW/2.png)](https://postimg.cc/hfbBLSr2)
+
+[![market-data.png](https://i.postimg.cc/k4MnytLK/3.png)](https://postimg.cc/bGMcydyw)
+
 ## Tech Stack 🛠
 
-**Client:** React, TailwindCSS, Material-Tailwind, Framer Motion
+**Client:** React, TailwindCSS, Material-Tailwind, Framer Motion, Lottie, React-Scroll, React-intersection-observer
 
-**Server:** Node
+**Server:** Node.js
+
+**Design** With Photoshop and Midjourney IA for Logo's
 
 
-## Run Locally (Version 1.0) 🙌
+## Run Locally (Version 2.0) 🙌
 
 You must require `Node.js` on your PC
 
@@ -49,6 +56,14 @@ Install dependencies
 ```bash
   npm install
 ```
+
+Get API Key from CoinGecko
+```bash
+  https://www.coingecko.com/en/api
+```
+
+Create .env file (See example inside)
+
 
 Start the server
 
