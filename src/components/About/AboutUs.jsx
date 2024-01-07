@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { motion, useAnimation } from "framer-motion";
 import Lottie from "lottie-react";
 import animation from "./blocks-animation.json";

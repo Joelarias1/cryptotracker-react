@@ -14,7 +14,7 @@ const handleApiResponse = async (response) => {
 };
 
 
-// Función para formatear porcentajes
+// Format Percentages
 const formatPercentage = (percentage) => {
   return `${parseFloat(percentage).toFixed(2)} %`;
 };
@@ -29,7 +29,6 @@ export const getCoinsList = async () => {
     );
     const data = await handleApiResponse(response);
 
-    // Formatear los valores numéricos y porcentajes
     const formattedData = data.map((coin) => {
       return {
         rank: coin.market_cap_rank,

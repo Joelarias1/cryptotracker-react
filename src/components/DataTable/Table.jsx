@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import {
   Card,
   Typography,
   CardBody,
   Avatar,
-  // Input,
+  Input
 } from "@material-tailwind/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { getCoinsList } from "../../api/main-api";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
@@ -18,6 +20,7 @@ const TABLE_HEAD = [
   "24h",
   "7d",
   "MarketCap",
+  "See More"
 ];
 
 export const Table = ({name}) => {
@@ -82,23 +85,26 @@ export const Table = ({name}) => {
           </p>
         </div>
 
-        {/* <div className="mb-4 flex flex-col justify-center md:flex-row md:items-center mx-5">
+        <div className="mb-4 flex flex-col justify-center md:flex-row md:items-center mx-5">
         <div className="flex w-full shrink-0 gap-2 md:w-max">
           <div className="w-full md:w-96">
             <Input
+              disabled
+              placeholder="Soon..."
               labelProps={{
                 className: "hidden",
               }}
               icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              className="!border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900"
+              className="!border-1 !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900"
             />
           </div>
         </div>
-      </div> */}
+      </div>
+
+      
 
         <div className="flex justify-center items-center mx-3">
           {loading ? (
-            // Mostrar el texto "Loading" mientras se cargan los datos
             <Typography
               variant="small"
               color="blue-gray"

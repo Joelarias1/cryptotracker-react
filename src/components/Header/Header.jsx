@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import "./header.css";
