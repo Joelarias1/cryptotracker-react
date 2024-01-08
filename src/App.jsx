@@ -14,7 +14,7 @@ function App() {
       <Header name="header"/>
       <AboutUs name="about-us" />
       <Table name="market" />
-      <BrandsSection/>
+      <BrandsSection name="tech"/>
       <Footer/>
     </div>
   );

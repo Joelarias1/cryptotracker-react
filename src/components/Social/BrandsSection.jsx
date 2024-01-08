@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect  } from "react";
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
-import { FiLink } from "react-icons/fi";
+// import { FiLink } from "react-icons/fi";
 
-export const BrandsSection = () => {
-  const socialAnimation = {
-    scale: 1.15,
-    transition: { duration: 0.3 },
-  };
+export const BrandsSection = ({name}) => {
+  // const socialAnimation = {
+  //   scale: 1.15,
+  //   transition: { duration: 0.3 },
+  // };
 
   const sectionAnimation = {
     hidden: { opacity: 0 },
@@ -33,15 +34,15 @@ export const BrandsSection = () => {
   };
 
   return (
-    <section className="py-12 text-center bg-zinc-900 border-b-8 border-blue-400">
+    <section id={name} className="py-6 text-center bg-zinc-900 border-b-8 border-blue-400">
       <motion.div
              initial="hidden"
              animate={controls}
              variants={sectionAnimation}
              ref={ref} 
       >
-        <div className="mb-8 flex items-center justify-center gap-2">
-          <h2 className="text-white font-medium text-4xl mr-2">Made With</h2>
+        {/* <div className="py-10 flex items-center justify-center gap-2">
+          <h2 className="text-white font-medium text-4xl mr-2"></h2>
           <motion.a
             href="https://github.com/Joelarias1/cryptotracker-react"
             className="inline-flex items-center justify-center p-3 border border-white rounded-full transition duration-300"
@@ -51,13 +52,13 @@ export const BrandsSection = () => {
           >
             <FiLink className="text-white text-2xl" />
           </motion.a>
-        </div>
-        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1 px-6">
+        </div> */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1 px-6">
           <div className="mb-12 lg:mb-0 mx-auto flex items-center justify-center">
             <motion.img
               whileHover={imageAnimation}
               src="https://www.cdnlogo.com/logos/r/63/react.svg"
-              className="px-2 object-cover w-48"
+              className="px-2 object-cover w-32"
               alt="React - Logo"
             />
           </div>
@@ -66,7 +67,7 @@ export const BrandsSection = () => {
             <motion.img
               whileHover={imageAnimation}
               src="https://www.cdnlogo.com/logos/t/58/tailwindcss.svg"
-              className="px-2 object-cover w-48"
+              className="px-2 object-cover w-32"
               alt="Tailwind CSS - Logo"
             />
           </div>
@@ -75,7 +76,7 @@ export const BrandsSection = () => {
             <motion.img
               whileHover={imageAnimation}
               src="https://www.cdnlogo.com/logos/j/44/javascript.svg"
-              className="px-2 object-cover w-48"
+              className="px-2 object-cover w-32"
               alt="Javascript - logo"
             />
           </div>
@@ -84,7 +85,7 @@ export const BrandsSection = () => {
             <motion.img
               whileHover={imageAnimation}
               src={coingeckoLogo}
-              className="px-2 object-cover w-80"
+              className="px-2 object-cover w-72"
               alt="Coingecko Logo API"
             />
           </div>

@@ -61,6 +61,22 @@ function NavList() {
           </Link>
       </Typography>
 
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        <Link
+            to="tech"
+            smooth={true}
+            duration={500}
+            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105" 
+          >
+            Tech Stack
+          </Link>
+      </Typography>
+
       <li className="p-1 font-medium">
         <SubscribeButton />
       </li>

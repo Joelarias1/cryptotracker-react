@@ -4,13 +4,15 @@ import {
   Typography,
   CardBody,
   Avatar,
-  Input
+  Input,
 } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { getCoinsList } from "../../api/main-api";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { CiCircleMore } from "react-icons/ci";
+
 
 const TABLE_HEAD = [
   "Rank",
@@ -20,10 +22,10 @@ const TABLE_HEAD = [
   "24h",
   "7d",
   "MarketCap",
-  "See More"
+  "See More",
 ];
 
-export const Table = ({name}) => {
+export const Table = ({ name }) => {
   const [coinsData, setCoinsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -86,22 +88,20 @@ export const Table = ({name}) => {
         </div>
 
         <div className="mb-4 flex flex-col justify-center md:flex-row md:items-center mx-5">
-        <div className="flex w-full shrink-0 gap-2 md:w-max">
-          <div className="w-full md:w-96">
-            <Input
-              disabled
-              placeholder="Soon..."
-              labelProps={{
-                className: "hidden",
-              }}
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              className="!border-1 !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900"
-            />
+          <div className="flex w-full shrink-0 gap-2 md:w-max">
+            <div className="w-full md:w-96">
+              <Input
+                disabled
+                placeholder="Soon..."
+                labelProps={{
+                  className: "hidden",
+                }}
+                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                className="!border-1 !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900"
+              />
+            </div>
           </div>
         </div>
-      </div>
-
-      
 
         <div className="flex justify-center items-center mx-3">
           {loading ? (
@@ -216,6 +216,16 @@ export const Table = ({name}) => {
                           >
                             {coin.marketcap}
                           </Typography>
+                        </td>
+                        <td className="p-4">
+                          <motion.a
+                            href="https://github.com/Joelarias1/cryptotracker-react"
+                            className="inline-flex items-center justify-center p-3 border border-white rounded-full transition duration-300"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <CiCircleMore  className="text-gray-700 text-2xl" />
+                          </motion.a>
                         </td>
                       </tr>
                     ))}
