@@ -12,6 +12,8 @@ import {
 
 import { VscGithub } from "react-icons/vsc";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
+import animation from '../../assets/rocket-animation.json';
 
 // El componente DialogCustomAnimation es un diálogo personalizado que acepta dos props:
 // - isOpen: un booleano que indica si el diálogo está abierto o cerrado.
@@ -30,9 +32,9 @@ export function DialogCustomAnimation({ isOpen, handler }) {
       size="xs"
     >
       <Card className="mx-auto w-full max-w-[24rem]">
-        <CardHeader floated={false} className="h-full">
-          <img
-            src="https://happyvalentinesday2020.online/pics/cdn.dribbble.com/users/6616/screenshots/1458875/rocket.gif"
+        <CardHeader floated={false} className="h-full shadow-none">
+          <Lottie
+            animationData={animation}
             alt="rocket-picture"
             className="object-cover"
           />
