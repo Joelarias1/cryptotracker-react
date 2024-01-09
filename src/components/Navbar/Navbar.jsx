@@ -11,9 +11,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { DialogCustomAnimation } from "./Suscribe";
 import myLogo from "../../assets/logo2.png";
 import "./navbar.css";
-import { Link } from 'react-scroll';
-
-
+import { Link } from "react-scroll";
 
 function NavList() {
   return (
@@ -36,13 +34,13 @@ function NavList() {
 
       <Typography as="li" variant="small" className="p-1 font-medium">
         <Link
-            to="about-us"
-            smooth={true}
-            duration={500}
-            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
-          >
-            About Us
-          </Link>
+          to="about-us"
+          smooth={true}
+          duration={500}
+          className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
+        >
+          About Us
+        </Link>
       </Typography>
 
       <Typography
@@ -52,13 +50,13 @@ function NavList() {
         className="p-1 font-medium"
       >
         <Link
-            to="market"
-            smooth={true}
-            duration={500}
-            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105" 
-          >
-            Demo
-          </Link>
+          to="market"
+          smooth={true}
+          duration={500}
+          className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
+        >
+          Demo
+        </Link>
       </Typography>
 
       <Typography
@@ -68,13 +66,13 @@ function NavList() {
         className="p-1 font-medium"
       >
         <Link
-            to="tech"
-            smooth={true}
-            duration={500}
-            className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105" 
-          >
-            Tech Stack
-          </Link>
+          to="tech"
+          smooth={true}
+          duration={500}
+          className="flex items-center hover:text-blue-400 transition-colors cursor-pointer hover:scale-105"
+        >
+          Tech Stack
+        </Link>
       </Typography>
 
       <li className="p-1 font-medium">
@@ -102,18 +100,21 @@ const SubscribeButton = () => {
       >
         <Button
           ripple
-          className="mt-4 lg:mt-0 lg:ml-auto text-xs rounded-2xl font-medium bg-blue-600"
+          className="mt-4 lg:mt-0 ml-auto text-xs rounded-2xl font-medium bg-blue-600"
           onClick={handleOpen}
         >
           Subscribe
         </Button>
       </motion.div>
 
-      <DialogCustomAnimation isOpen={dialogOpen} handler={handleOpen}
+      <DialogCustomAnimation
+        isOpen={dialogOpen}
+        handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
-        }} />
+        }}
+      />
     </>
   );
 };

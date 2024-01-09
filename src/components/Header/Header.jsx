@@ -39,7 +39,7 @@ const Header = ({name}) => {
             </h1>
 
             <Link
-              to="market"  // Nombre del elemento al que quieres dirigirte (usando el id)
+              to="market" 
               spy={true}
               smooth={true}
               duration={500}

@@ -1,5 +1,7 @@
 // services/api.js
 
+import { formatPercentage } from "./utils";
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.coingecko.com/api/v3";
 
@@ -14,11 +16,6 @@ const handleApiResponse = async (response) => {
 };
 
 
-// Format Percentages
-const formatPercentage = (percentage) => {
-  return `${parseFloat(percentage).toFixed(2)} %`;
-};
-
 
 // Endpoints
 
@@ -31,6 +28,7 @@ export const getCoinsList = async () => {
 
     const formattedData = data.map((coin) => {
       return {
+        id: coin.id,
         rank: coin.market_cap_rank,
         name: coin.name,
         image: coin.image,
@@ -47,9 +45,7 @@ export const getCoinsList = async () => {
           minimumFractionDigits: 2,
           maximumFractionDigits: 3,
         })}`,
-        marketcap: `$ ${coin.market_cap.toLocaleString("en-US", {
-          minimumFractionDigits: 2,
-        })}`,
+        marketcap: `$ ${coin.market_cap.toLocaleString("en-US")}`,
       };
     });
 
@@ -89,3 +85,30 @@ export const getGlobalData = async () => {
   }
 };
 
+
+
+// Coin details
+
+export const getCoinInfo = async (coinId) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/coins/${coinId}?localization=false&x_cg_demo_api_key=${API_KEY}`
+    );
+    const data = await handleApiResponse(response);
+
+    return {
+      name: data.name,
+      symbol: data.symbol.toUpperCase(),
+      image: data.image.large,
+      rank: data.market_cap_rank,
+      description: data.description?.en,
+      price: data.market_data.current_price.usd.toLocaleString("en-US"),
+      ath: data.market_data.ath.usd.toLocaleString("en-US"),
+      price24h:formatPercentage( data.market_data.price_change_percentage_24h),
+
+    };
+  } catch (error) {
+    console.error(`Error in getCoinInfo: ${error.message}`);
+    throw error;
+  }
+};
