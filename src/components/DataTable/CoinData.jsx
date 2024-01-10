@@ -5,8 +5,6 @@ import {
   DialogBody,
   Typography,
   Avatar,
-  Card,
-  CardBody,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { getCoinInfo } from "../../api/main-api";
@@ -31,11 +29,12 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     }
   }, [isOpen, coinId]);
 
+
   return (
     <Dialog
       open={isOpen}
       handler={handler}
-      className="bg-zinc-100 shadow-none max-w-[250px] w-full overflow-hidden"
+      className="bg-zinc-100 w-full overflow-hidden h-fit"
       size="xl"
     >
       {coinInfo ? (
@@ -46,7 +45,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                 src={coinInfo.image}
                 alt={coinInfo.name}
                 size="xxl"
-                className="bg-blue-gray-50/50 object-contain p-1"
+                className="bg-blue-gray-50/50 object-contain p-1 shadow-sm"
               />
               <div className="flex flex-col sm:text-start items-center sm:items-start">
                 <Typography
@@ -106,20 +105,16 @@ export function CoinInformation({ isOpen, handler, coinId }) {
             </div>
           </DialogHeader>
 
-          <DialogBody className="h-[42rem] overflow-scroll">
-            <Card className="h-full">
-              <CardBody className="flex items-center justify-center h-full">
-                <Typography variant="h5" color="blue-gray" className="mb-2">
-                  Soon...
-                </Typography>
-              </CardBody>
-            </Card>
+          <DialogBody className="overflow-scroll bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+              Soon...
+            </Typography>
           </DialogBody>
         </>
       ) : (
-        <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 px-8">
+        <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 justify-center">
           <Typography
-            variant="h2"
+            variant="h3"
             color="blue-gray"
             className="font-medium text-6xl sm:text-lg md:text-xl"
           >

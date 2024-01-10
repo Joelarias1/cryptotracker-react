@@ -51,6 +51,12 @@ const CoinDetailsButton = ({ coinId }) => {
   );
 };
 
+  const buttonAnimation = {
+    scale: 1.1,
+    transition: { duration: 0.3 },
+  };
+
+
 export const Table = ({ name }) => {
   const [coinsData, setCoinsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -221,7 +227,12 @@ export const Table = ({ name }) => {
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <CoinDetailsButton coinId={coin.id} />
+                          <motion.div
+                            whileHover={buttonAnimation}
+                            className="cursor-pointer"
+                          >
+                            <CoinDetailsButton coinId={coin.id} />
+                          </motion.div>
                         </td>
                       </tr>
                     ))}

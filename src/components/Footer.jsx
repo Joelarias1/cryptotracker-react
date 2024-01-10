@@ -7,7 +7,7 @@ import { Link } from "react-scroll";
 const Footer = () => {
   const motionVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
   };
   const controls = useAnimation();
   const [ref, inView] = useInView({

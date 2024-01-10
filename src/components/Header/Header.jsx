@@ -10,7 +10,7 @@ import { Link } from "react-scroll";
 const Header = ({name}) => {
   const motionVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
   };
 
   const controls = useAnimation();

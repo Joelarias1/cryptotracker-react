@@ -30,7 +30,7 @@ export const AboutUs = ({ name }) => {
 
   const sectionAnimation = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
   };
 
   const cardsAnimation = {
