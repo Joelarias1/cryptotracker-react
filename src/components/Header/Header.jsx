@@ -30,7 +30,7 @@ const Header = ({name}) => {
       <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="mt-12 lg:mt-0">
-            <p className="text-base md:text-lg lg:text-xl font-bold leading-tight mx-2 text-blue-300">
+            <p className="text-base md:text-lg lg:text-xl font-bold leading-tight text-blue-300">
               Introducing Crypto Portfolio
             </p>
             <h1 className="mt-0 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl text-slate-100">
