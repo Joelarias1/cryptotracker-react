@@ -29,7 +29,6 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     }
   }, [isOpen, coinId]);
 
-
   return (
     <Dialog
       open={isOpen}
@@ -104,8 +103,36 @@ export function CoinInformation({ isOpen, handler, coinId }) {
               </div>
             </div>
           </DialogHeader>
+          <DialogHeader className="flex flex-col sm:flex-row bg-zinc-600 text-white px-8 justify-center">
+            <div className="flex flex-col sm:flex-row gap-8">
+              <Typography
+                variant="lead"
+                color="blue-gray"
+                className="text-base font-medium pb-1 sm:mb-0"
+              >
+                Circulating Supply:
+                <span className="font-normal"> {coinInfo.totalSupply} </span>
+              </Typography>
+              <Typography
+                variant="lead"
+                color="blue-gray"
+                className="text-base font-medium pb-1 sm:mb-0"
+              >
+                Max Supply:
+                <span className="font-normal"> {coinInfo.maxSupply} </span>
+              </Typography>
+              <Typography
+                variant="lead"
+                color="blue-gray"
+                className="text-base font-medium pb-1 sm:mb-0"
+              >
+                Users Watchlist:
+                <span className="font-normal"> {coinInfo.userWatchlist} </span>
+              </Typography>
+            </div>
+          </DialogHeader>
 
-          <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
+          <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center h-80">
             <Typography variant="h5" color="blue-gray" className="mb-2">
               Soon...
             </Typography>
@@ -113,11 +140,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
         </>
       ) : (
         <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 justify-center">
-          <Typography
-            variant="h4"
-            color="blue-gray"
-            className="font-medium "
-          >
+          <Typography variant="h4" color="blue-gray" className="font-medium ">
             Loading...
           </Typography>
         </DialogHeader>

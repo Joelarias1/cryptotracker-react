@@ -96,15 +96,22 @@ export const getCoinInfo = async (coinId) => {
     );
     const data = await handleApiResponse(response);
 
+    const maxSupply = data.market_data.max_supply !== null
+    ? data.market_data.max_supply.toLocaleString("en-US")
+    : "∞";
+
+
     return {
       name: data.name,
       symbol: data.symbol.toUpperCase(),
       image: data.image.large,
       rank: data.market_cap_rank,
-      description: data.description?.en,
       price: data.market_data.current_price.usd.toLocaleString("en-US"),
       ath: data.market_data.ath.usd.toLocaleString("en-US"),
       price24h:formatPercentage( data.market_data.price_change_percentage_24h),
+      totalSupply:data.market_data.total_supply.toLocaleString("en-US"),  
+      maxSupply: maxSupply,
+      userWatchlist: data.watchlist_portfolio_users.toLocaleString("en-US"),
 
     };
   } catch (error) {
