@@ -41,7 +41,7 @@ export const AboutUs = ({ name }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0.15,
   });
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export const AboutUs = ({ name }) => {
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.activeCrypto || 0}
                     </p>
-                    <h2 className="text-md text-gray-700 font-normal">
+                    <h2 className="text-md text-gray-700 font-medium">
                       Crypto Currencies
                     </h2>
                   </motion.div>
@@ -101,7 +101,7 @@ export const AboutUs = ({ name }) => {
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.markets || 0}
                     </p>
-                    <h2 className="text-md text-gray-700 font-normal">
+                    <h2 className="text-md text-gray-700 font-medium">
                       Markets
                     </h2>
                   </motion.div>
@@ -114,7 +114,7 @@ export const AboutUs = ({ name }) => {
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.totalExchanges || 0}
                     </p>
-                    <h2 className="text-md text-gray-700 font-normal">
+                    <h2 className="text-md text-gray-700 font-medium">
                       Total Exchanges
                     </h2>
                   </motion.div>
@@ -127,8 +127,8 @@ export const AboutUs = ({ name }) => {
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
                       {loading ? "Loading..." : marketData.icos || 0}
                     </p>
-                    <h2 className="text-md text-gray-700 font-normal">
-                      Ongoing Icos
+                    <h2 className="text-md text-gray-700 font-medium">
+                      Ongoing ICO
                     </h2>
                   </motion.div>
                 </div>

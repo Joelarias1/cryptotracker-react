@@ -53,7 +53,7 @@ const CoinDetailsButton = ({ coinId }) => {
 
   const buttonAnimation = {
     scale: 1.1,
-    transition: { duration: 0.3 },
+    transition: { duration: 0.6 },
   };
 
 
@@ -79,12 +79,12 @@ export const Table = ({ name }) => {
 
   const motionVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 1 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.6 } },
   };
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0.15
   });
 
   useEffect(() => {

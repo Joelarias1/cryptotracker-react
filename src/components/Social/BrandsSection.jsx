@@ -13,13 +13,13 @@ export const BrandsSection = ({name}) => {
 
   const sectionAnimation = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.6 } },
   };
 
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0.15,
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const BrandsSection = ({name}) => {
 
   const imageAnimation = {
     scale: 1.15,
-    transition: { duration: 0.2 },
+    transition: { duration: 0.3 },
   };
 
   return (
@@ -41,18 +41,6 @@ export const BrandsSection = ({name}) => {
              variants={sectionAnimation}
              ref={ref} 
       >
-        {/* <div className="py-10 flex items-center justify-center gap-2">
-          <h2 className="text-white font-medium text-4xl mr-2"></h2>
-          <motion.a
-            href="https://github.com/Joelarias1/cryptotracker-react"
-            className="inline-flex items-center justify-center p-3 border border-white rounded-full transition duration-300"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={socialAnimation}
-          >
-            <FiLink className="text-white text-2xl" />
-          </motion.a>
-        </div> */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1 px-6">
           <div className="mb-12 lg:mb-0 mx-auto flex items-center justify-center">
             <motion.img

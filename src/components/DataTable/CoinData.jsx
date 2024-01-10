@@ -114,9 +114,9 @@ export function CoinInformation({ isOpen, handler, coinId }) {
       ) : (
         <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 justify-center">
           <Typography
-            variant="h3"
+            variant="h4"
             color="blue-gray"
-            className="font-medium text-6xl sm:text-lg md:text-xl"
+            className="font-medium "
           >
             Loading...
           </Typography>

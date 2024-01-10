@@ -7,12 +7,12 @@ import { Link } from "react-scroll";
 const Footer = () => {
   const motionVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
+    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.6 } },
   };
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0.15,
   });
 
   useEffect(() => {
