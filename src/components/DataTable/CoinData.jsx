@@ -105,7 +105,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
             </div>
           </DialogHeader>
 
-          <DialogBody className="overflow-scroll bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
+          <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
             <Typography variant="h5" color="blue-gray" className="mb-2">
               Soon...
             </Typography>
