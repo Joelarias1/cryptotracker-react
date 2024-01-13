@@ -108,10 +108,12 @@ export const getCoinInfo = async (coinId) => {
       rank: data.market_cap_rank,
       price: data.market_data.current_price.usd.toLocaleString("en-US"),
       ath: data.market_data.ath.usd.toLocaleString("en-US"),
+      athChange: formatPercentage(data.market_data.ath_change_percentage.usd),
       price24h:formatPercentage( data.market_data.price_change_percentage_24h),
-      totalSupply:data.market_data.total_supply.toLocaleString("en-US"),  
+      totalSupply:data.market_data.circulating_supply.toLocaleString("en-US"),  
       maxSupply: maxSupply,
       userWatchlist: data.watchlist_portfolio_users.toLocaleString("en-US"),
+      linkHome: data.links.homepage[0] ?? " ",
 
     };
   } catch (error) {
