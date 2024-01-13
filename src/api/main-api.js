@@ -15,8 +15,6 @@ const handleApiResponse = async (response) => {
   return data;
 };
 
-
-
 // Endpoints
 
 export const getCoinsList = async () => {
@@ -56,22 +54,26 @@ export const getCoinsList = async () => {
   }
 };
 
-
-
 // Market Data
 
 export const getGlobalData = async () => {
   try {
-    const globalResponse = await fetch(`${BASE_URL}/global?x_cg_demo_api_key=${API_KEY}`);
+    const globalResponse = await fetch(
+      `${BASE_URL}/global?x_cg_demo_api_key=${API_KEY}`
+    );
     const { data } = await handleApiResponse(globalResponse);
 
-    const exchangesResponse = await fetch(`${BASE_URL}/exchanges?x_cg_demo_api_key=${API_KEY}`);
-    
+    const exchangesResponse = await fetch(
+      `${BASE_URL}/exchanges?x_cg_demo_api_key=${API_KEY}`
+    );
+
     if (!exchangesResponse.ok) {
-      throw new Error(`Failed to fetch exchanges data. Status: ${exchangesResponse.status}`);
+      throw new Error(
+        `Failed to fetch exchanges data. Status: ${exchangesResponse.status}`
+      );
     }
 
-    const totalExchanges = exchangesResponse.headers.get('total');
+    const totalExchanges = exchangesResponse.headers.get("total");
 
     return {
       activeCrypto: data.active_cryptocurrencies.toLocaleString(),
@@ -85,8 +87,6 @@ export const getGlobalData = async () => {
   }
 };
 
-
-
 // Coin details
 
 export const getCoinInfo = async (coinId) => {
@@ -96,10 +96,10 @@ export const getCoinInfo = async (coinId) => {
     );
     const data = await handleApiResponse(response);
 
-    const maxSupply = data.market_data.max_supply !== null
-    ? data.market_data.max_supply.toLocaleString("en-US")
-    : "∞";
-
+    const maxSupply =
+      data.market_data.max_supply !== null
+        ? data.market_data.max_supply.toLocaleString("en-US")
+        : "∞";
 
     return {
       name: data.name,
@@ -109,15 +109,62 @@ export const getCoinInfo = async (coinId) => {
       price: data.market_data.current_price.usd.toLocaleString("en-US"),
       ath: data.market_data.ath.usd.toLocaleString("en-US"),
       athChange: formatPercentage(data.market_data.ath_change_percentage.usd),
-      price24h:formatPercentage( data.market_data.price_change_percentage_24h),
-      totalSupply:data.market_data.circulating_supply.toLocaleString("en-US"),  
+      price24h: formatPercentage(data.market_data.price_change_percentage_24h),
+      totalSupply: data.market_data.circulating_supply.toLocaleString("en-US"),
       maxSupply: maxSupply,
       userWatchlist: data.watchlist_portfolio_users.toLocaleString("en-US"),
       linkHome: data.links.homepage[0] ?? " ",
-
     };
   } catch (error) {
     console.error(`Error in getCoinInfo: ${error.message}`);
     throw error;
   }
 };
+
+// Search coins for search bar.
+
+export const searchCoins = async (query) => {
+  try {
+    // Comprobar si el término de búsqueda está vacío
+    if (query.trim() === "") {
+      return [];
+    }
+
+    // Añadir un retraso de 300 ms (puedes ajustar este valor)
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    const response = await fetch(
+      `${BASE_URL}/search?query=${encodeURIComponent(query)}&x_cg_demo_api_key=${API_KEY}`
+    );
+    const searchData = await handleApiResponse(response);
+
+    if (Array.isArray(searchData.coins)) {
+      const sortedResults = searchData.coins
+        .map((result) => {
+          const nameMatch = result.name.toLowerCase().includes(query.toLowerCase());
+          const symbolMatch = result.symbol.toLowerCase().includes(query.toLowerCase());
+
+          return {
+            ...result,
+            score: (nameMatch ? query.length : 0) + (symbolMatch ? query.length : 0),
+            large: result.large || null,
+          };
+        })
+        .filter((result) => result.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(({ id, name, symbol, large }) => ({ id, name, symbol, large }));
+
+      return sortedResults;
+    } else {
+      console.error("Unexpected response format in searchCoins or no exists", searchData);
+      return [];
+    }
+  } catch (error) {
+    console.error(`Error in searchCoins: ${error.message}`);
+    throw error;
+  }
+};
+
+
+
+
