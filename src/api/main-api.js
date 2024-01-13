@@ -87,33 +87,53 @@ export const getGlobalData = async () => {
   }
 };
 
+
+
+
 // Coin details
 
+/**
+ * Retrieve detailed information about a specific cryptocurrency.
+ * @param {string} coinId - The unique identifier of the cryptocurrency.
+ * @returns {Promise<Object>} - An object containing various details about the cryptocurrency.
+ * The object includes name, symbol, image, rank, price, ath (all-time high), athChange,
+ * price24h (price change in the last 24 hours), totalSupply, maxSupply, userWatchlist, and linkHome properties.
+ */
 export const getCoinInfo = async (coinId) => {
   try {
+    // Make a fetch request to the API to get detailed information about the cryptocurrency
     const response = await fetch(
       `${BASE_URL}/coins/${coinId}?localization=false&x_cg_demo_api_key=${API_KEY}`
     );
+
+    // Process the API response
     const data = await handleApiResponse(response);
 
+    // Format the maxSupply value for display
     const maxSupply =
       data.market_data.max_supply !== null
         ? data.market_data.max_supply.toLocaleString("en-US")
         : "∞";
+
+    // Format the price, ath, and athChange values for display with at least 5 decimal places
+    const formatValue = (value) => {
+      const parsedValue = parseFloat(value);
+      return parsedValue < 0 ? parsedValue.toLocaleString("en-US", { minimumFractionDigits: 5 }) : parsedValue.toLocaleString("en-US");
+    };
 
     return {
       name: data.name,
       symbol: data.symbol.toUpperCase(),
       image: data.image.large,
       rank: data.market_cap_rank,
-      price: data.market_data.current_price.usd.toLocaleString("en-US"),
-      ath: data.market_data.ath.usd.toLocaleString("en-US"),
+      price: formatValue(data.market_data.current_price.usd),
+      ath: formatValue(data.market_data.ath.usd),
       athChange: formatPercentage(data.market_data.ath_change_percentage.usd),
       price24h: formatPercentage(data.market_data.price_change_percentage_24h),
       totalSupply: data.market_data.circulating_supply.toLocaleString("en-US"),
       maxSupply: maxSupply,
       userWatchlist: data.watchlist_portfolio_users.toLocaleString("en-US"),
-      linkHome: data.links.homepage[0] ?? " ",
+      linkHome: data.links.homepage[0] || " ", // Use a space if the link is not available
     };
   } catch (error) {
     console.error(`Error in getCoinInfo: ${error.message}`);
@@ -121,24 +141,37 @@ export const getCoinInfo = async (coinId) => {
   }
 };
 
+
+
 // Search coins for search bar.
 
+/**
+ * Perform a search for cryptocurrencies based on the provided query.
+ * @param {string} query - The search query to find cryptocurrencies.
+ * @returns {Promise<Array<Object>>} - An array of objects representing the search results.
+ * Each object contains id, name, symbol, and large properties.
+ */
 export const searchCoins = async (query) => {
   try {
-    // Comprobar si el término de búsqueda está vacío
-    if (query.trim() === "") {
+    // Check if the query length is less than 2 characters
+    if (query.trim().length < 2) {
       return [];
     }
 
-    // Añadir un retraso de 300 ms (puedes ajustar este valor)
+    // Introduce a delay of 300 milliseconds
     await new Promise(resolve => setTimeout(resolve, 300));
 
+    // Make a fetch request to the API
     const response = await fetch(
       `${BASE_URL}/search?query=${encodeURIComponent(query)}&x_cg_demo_api_key=${API_KEY}`
     );
+
+    // Process the API response
     const searchData = await handleApiResponse(response);
 
+    // Check if the response contains an array of coins
     if (Array.isArray(searchData.coins)) {
+      // Process and sort the results based on a scoring mechanism
       const sortedResults = searchData.coins
         .map((result) => {
           const nameMatch = result.name.toLowerCase().includes(query.toLowerCase());
@@ -164,6 +197,7 @@ export const searchCoins = async (query) => {
     throw error;
   }
 };
+
 
 
 
