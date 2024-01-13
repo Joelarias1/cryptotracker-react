@@ -12,19 +12,18 @@ It is mainly a Single Page Application where it will show the prices of differen
 
 - Show prices ✅ 
 
-- Create cryptocurrency search engine ❌ (Soon)
+- Create cryptocurrency search engine ✅
 
-- Soon 🚀
 
 ## Screenshots 🎞
 
-[![front-page.png](https://i.postimg.cc/G37pqqL2/1.png)](https://postimg.cc/4ncZ3vhk)
+[![1.png](https://i.postimg.cc/13M0Q4j6/1.png)](https://postimg.cc/BjLP5ZsQ)
 
-[![whitelist.png](https://i.postimg.cc/cCHsZYyz/2.png)](https://postimg.cc/62ksf8QV)
+[![2.png](https://i.postimg.cc/C5ykN8Ry/2.png)](https://postimg.cc/7GV5Pf1X)
 
-[![aboutus.png](https://i.postimg.cc/5ND2MyFW/2.png)](https://postimg.cc/hfbBLSr2)
+[![3.png](https://i.postimg.cc/44tz3W0X/3.png)](https://postimg.cc/yW1JQyBG)
 
-[![market-data.png](https://i.postimg.cc/k4MnytLK/3.png)](https://postimg.cc/bGMcydyw)
+[![4.png](https://i.postimg.cc/m2yCYtRq/4.png)](https://postimg.cc/CzdRYMRH)
 
 ## Tech Stack 🛠
 
@@ -33,6 +32,8 @@ It is mainly a Single Page Application where it will show the prices of differen
 **Server:** Node.js
 
 **Design** With Photoshop and Midjourney IA for Logo's
+
+**Others** Million.js and Vite
 
 
 ## Run Locally (Version 2.0) 🙌
