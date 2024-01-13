@@ -118,7 +118,10 @@ export const getCoinInfo = async (coinId) => {
     // Format the price, ath, and athChange values for display with at least 5 decimal places
     const formatValue = (value) => {
       const parsedValue = parseFloat(value);
-      return parsedValue < 0 ? parsedValue.toLocaleString("en-US", { minimumFractionDigits: 5 }) : parsedValue.toLocaleString("en-US");
+      const formattedValue = parsedValue.toLocaleString("en-US", {
+        minimumFractionDigits: parsedValue < 1 ? 6 : 0,
+      });
+      return formattedValue;
     };
 
     return {

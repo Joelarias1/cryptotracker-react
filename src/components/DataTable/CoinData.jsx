@@ -13,7 +13,6 @@ import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { CiLink } from "react-icons/ci";
 
-
 export function CoinInformation({ isOpen, handler, coinId }) {
   const [coinInfo, setCoinInfo] = useState(null);
 
@@ -41,7 +40,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     >
       {coinInfo ? (
         <>
-          <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 px-8">
+          <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 md:px-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center sm:mr-3">
               <Avatar
                 src={coinInfo.image}
@@ -78,13 +77,13 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   </div>
                   <div className="rounded-full bg-lime-600 px-3">
                     <a href={coinInfo.linkHome}>
-                    <Typography
-                      variant="paragraph"
-                      color="white"
-                      className="font-medium cursor-pointer flex gap-1"
-                    >
-                      Website <CiLink className="text-2xl" />
-                    </Typography>
+                      <Typography
+                        variant="paragraph"
+                        color="white"
+                        className="font-medium cursor-pointer flex gap-1"
+                      >
+                        Website <CiLink className="text-2xl" />
+                      </Typography>
                     </a>
                   </div>
                 </div>
@@ -95,7 +94,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                 <Typography
                   variant="h2"
                   color="blue-gray"
-                  className="font-bold text-2xl sm:text-3xl md:text-4xl"
+                  className="font-bold text-2xl sm:text-3xl md:text-3xl"
                 >
                   $ {coinInfo.price || 0}
                 </Typography>
@@ -108,10 +107,10 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   >
                     {coinInfo.price24h || 0}
                   </Typography>
-                  {percentageValue(coinInfo.price24h).color === "green" ? (
-                    <BiSolidUpArrow className="text-green-500 ml-1 text-base sm:text-lg md:text-xl" />
-                  ) : (
+                  {percentageValue(coinInfo.price24h).color === "red" ? (
                     <BiSolidDownArrow className="text-red-500 ml-1 text-base sm:text-lg md:text-xl" />
+                  ) : (
+                    <BiSolidUpArrow className="text-green-500 ml-1 text-base sm:text-lg md:text-xl" />
                   )}
                 </div>
               </div>
@@ -119,7 +118,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                 <Typography
                   variant="h5"
                   color="blue-gray"
-                  className="font-medium text-base sm:text-lg md:text-xl"
+                  className="font-medium text-base sm:text-lg md:text-md"
                 >
                   ATH: $ {coinInfo.ath || "$ 0"}
                 </Typography>
@@ -127,15 +126,15 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="font-medium text-base sm:text-lg md:text-xl"
+                    className="font-medium text-base sm:text-lg md:text-md"
                     style={percentageValue(coinInfo.athChange)}
                   >
                     {coinInfo.athChange || 0}
                   </Typography>
-                  {percentageValue(coinInfo.price24h).color === "green" ? (
-                    <BiSolidUpArrow className="text-green-500 ml-1 text-base sm:text-lg md:text-xl" />
-                  ) : (
+                  {percentageValue(coinInfo.athChange).color === "red" ? (
                     <BiSolidDownArrow className="text-red-500 ml-1 text-base sm:text-lg md:text-xl" />
+                  ) : (
+                    <BiSolidUpArrow className="text-green-500 ml-1 text-base sm:text-lg md:text-xl" />
                   )}
                 </div>
               </div>
@@ -171,12 +170,11 @@ export function CoinInformation({ isOpen, handler, coinId }) {
               </Typography>
             </div>
           </DialogHeader>
-
-          <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center h-80">
+          {/* <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
             <Typography variant="h5" color="blue-gray" className="mb-2">
               Soon...
             </Typography>
-          </DialogBody>
+          </DialogBody> */}
         </>
       ) : (
         <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 justify-center">
