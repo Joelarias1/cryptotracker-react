@@ -8,7 +8,6 @@ import {
 } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { DialogCustomAnimation } from "./Suscribe";
 import myLogo from "../../assets/logo2.png";
 import "./navbar.css";
 import { Link } from "react-scroll";
@@ -76,18 +75,6 @@ function NavList() {
       </Typography>
 
       <li className="p-1 font-medium">
-        <SubscribeButton />
-      </li>
-    </ul>
-  );
-}
-
-const SubscribeButton = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const handleOpen = () => setDialogOpen(!dialogOpen);
-
-  return (
-    <>
       <motion.div
         whileTap={{
           scale: 0.75,
@@ -101,23 +88,16 @@ const SubscribeButton = () => {
         <Button
           ripple
           className="mt-4 lg:mt-0 ml-auto text-xs rounded-2xl font-medium bg-blue-600"
-          onClick={handleOpen}
+          disabled
         >
-          Subscribe
+          Soon 🦊
         </Button>
       </motion.div>
-
-      <DialogCustomAnimation
-        isOpen={dialogOpen}
-        handler={handleOpen}
-        animate={{
-          mount: { scale: 1, y: 0 },
-          unmount: { scale: 0.9, y: -100 },
-        }}
-      />
-    </>
+      </li>
+    </ul>
   );
-};
+}
+
 
 export const NavbarSimple = () => {
   const [openNav, setOpenNav] = useState(false);

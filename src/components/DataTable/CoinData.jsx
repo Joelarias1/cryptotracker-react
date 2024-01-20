@@ -35,7 +35,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     <Dialog
       open={isOpen}
       handler={handler}
-      className="bg-zinc-100 w-full overflow-hidden h-fit"
+      className="bg-none w-full overflow-hidden h-fit"
       size="xl"
     >
       {coinInfo ? (

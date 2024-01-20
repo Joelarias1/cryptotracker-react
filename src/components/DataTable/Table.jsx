@@ -124,7 +124,7 @@ export const Table = ({ name }) => {
           ) : (
             <Card className="w-full xl:w-4/5">
               <CardBody className="overflow-scroll">
-                <table className="w-full min-w-max table-auto text-left">
+                <table className="w-full min-w-max table-auto text-left overflow-hidden">
                   <thead>
                     <tr>
                       {TABLE_HEAD.map((head) => (

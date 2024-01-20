@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types */
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
-import "./header.css";
 import { Button } from "@material-tailwind/react";
-import Lottie from "lottie-react";
-import animation from "./animation.json";
 import { Link } from "react-scroll";
 
-const Header = ({name}) => {
+const Header = ({ name }) => {
   const motionVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.7 } },
@@ -21,20 +18,25 @@ const Header = ({name}) => {
 
   return (
     <motion.header
-      className="px-4 py-72 text-center md:px-12 lg:text-left"
+      className="px-4 py-64 text-center md:px-12 lg:text-left"
       initial="hidden"
       animate={controls}
       variants={motionVariants}
       id={name}
     >
-      <div className="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="mt-12 lg:mt-0">
-            <h1 className="mt-0 mb-10 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl text-slate-100">
-              TRACK ON REAL TIME <br />
-              <span className="text-blue-600">YOUR CRYPTO  <span className="text-blue-300">ASSETS</span></span>
-            </h1>
-
+      <div className="px-12 mx-auto max-w-7xl">
+        <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
+          <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-slate-50 md:text-6xl md:tracking-tight">
+            <span>Watch</span>{" "}
+            <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-blue-500 to-blue-300 lg:inline">
+              your favorite crypto
+            </span>{" "}
+            <span>in real time, here.</span>
+          </h1>
+          <p className="px-0 mb-8 text-lg text-slate-400 md:text-xl lg:px-24">
+          All your assets, in one place. Have the information you want about your favorite assets, prices, capitalization, new releases at the click of a button.
+          </p>
+          <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
             <Link
               to="market" 
               spy={true}
@@ -42,19 +44,12 @@ const Header = ({name}) => {
               duration={500}
             >
               <Button
-                className="bg-blue-600 px-14 text-sm font-medium uppercase leading-normal"
+                className="inline-flex items-center justify-center w-full px-14 py-3 mb-2 text-lg text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl sm:w-auto sm:mb-0 hover:scale-105"
                 ripple
               >
                 Try Demo
               </Button>
             </Link>
-          </div>
-          <div className="mb-12 lg:mb-0">
-            <Lottie
-              animationData={animation}
-              className="w-full"
-              alt="team-animation"
-            />
           </div>
         </div>
       </div>
