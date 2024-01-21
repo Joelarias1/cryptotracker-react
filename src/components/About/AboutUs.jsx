@@ -5,6 +5,8 @@ import animation from "./blocks-animation.json";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getGlobalData } from "../../api/main-api";
+import { Spinner } from "@material-tailwind/react";
+
 
 export const AboutUs = ({ name }) => {
   const [marketData, setMarketData] = useState([]);
@@ -86,7 +88,7 @@ export const AboutUs = ({ name }) => {
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {loading ? "Loading..." : marketData.activeCrypto || 0}
+                      {loading ? <Spinner color="blue" size="4xl" /> : marketData.activeCrypto || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
                       Crypto Currencies
@@ -99,7 +101,7 @@ export const AboutUs = ({ name }) => {
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {loading ? "Loading..." : marketData.markets || 0}
+                      {loading ? <Spinner color="blue" size="4xl" /> : marketData.markets || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
                       Markets
@@ -112,7 +114,7 @@ export const AboutUs = ({ name }) => {
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {loading ? "Loading..." : marketData.totalExchanges || 0}
+                      {loading ? <Spinner color="blue" size="4xl" />: marketData.totalExchanges || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
                       Total Exchanges
@@ -125,7 +127,7 @@ export const AboutUs = ({ name }) => {
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
-                      {loading ? "Loading..." : marketData.icos || 0}
+                      {loading ? <Spinner color="blue" size="4xl" /> : marketData.icos || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
                       Ongoing ICO

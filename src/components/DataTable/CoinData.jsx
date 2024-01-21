@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import {
   Dialog,
   DialogHeader,
-  DialogBody,
   Typography,
   Avatar,
 } from "@material-tailwind/react";
@@ -12,9 +11,11 @@ import { percentageValue } from "../../api/utils";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { CiLink } from "react-icons/ci";
+import { Spinner } from "@material-tailwind/react";
 
 export function CoinInformation({ isOpen, handler, coinId }) {
   const [coinInfo, setCoinInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCoinInfo = async () => {
@@ -23,10 +24,13 @@ export function CoinInformation({ isOpen, handler, coinId }) {
         setCoinInfo(coinData);
       } catch (error) {
         console.error("Error fetching coin information:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     if (isOpen && coinId) {
+      setLoading(true);
       fetchCoinInfo();
     }
   }, [isOpen, coinId]);
@@ -35,10 +39,17 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     <Dialog
       open={isOpen}
       handler={handler}
-      className="bg-none w-full overflow-hidden h-fit"
+      className="bg-none w-full overflow-hidden h-fit "
       size="xl"
     >
-      {coinInfo ? (
+      {loading ? (
+        <div className="flex items-center justify-center h-full gap-4 py-6">
+          <Typography variant="h3" color="blue-gray" className="font-bold">
+            Loading... 
+          </Typography>
+          <Spinner color="blue" size="4xl" />
+        </div>
+      ) : coinInfo ? (
         <>
           <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 md:px-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center sm:mr-3">
@@ -170,19 +181,8 @@ export function CoinInformation({ isOpen, handler, coinId }) {
               </Typography>
             </div>
           </DialogHeader>
-          {/* <DialogBody className="overflow-hidden bg-white rounded-lg shadow-xl my-8 mx-5 flex items-center justify-center">
-            <Typography variant="h5" color="blue-gray" className="mb-2">
-              Soon...
-            </Typography>
-          </DialogBody> */}
         </>
-      ) : (
-        <DialogHeader className="flex flex-col sm:flex-row items-center sm:items-start bg-zinc-100 justify-center">
-          <Typography variant="h4" color="blue-gray" className="font-medium ">
-            Loading...
-          </Typography>
-        </DialogHeader>
-      )}
+      ) : null}
     </Dialog>
   );
 }

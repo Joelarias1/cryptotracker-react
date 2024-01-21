@@ -4,6 +4,7 @@ import { Avatar, Input } from "@material-tailwind/react";
 import { searchCoins } from "../../api/main-api";
 import { CoinInformation } from "./CoinData";
 
+// eslint-disable-next-line react/prop-types
 const CoinDetailsButton = ({ coinId, children }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const handleOpen = () => setDialogOpen(!dialogOpen);

@@ -3,13 +3,9 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect  } from "react";
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
-// import { FiLink } from "react-icons/fi";
+
 
 export const BrandsSection = ({name}) => {
-  // const socialAnimation = {
-  //   scale: 1.15,
-  //   transition: { duration: 0.3 },
-  // };
 
   const sectionAnimation = {
     hidden: { opacity: 0 },
@@ -34,7 +30,7 @@ export const BrandsSection = ({name}) => {
   };
 
   return (
-    <section id={name} className="py-6 text-center bg-zinc-900 border-b-8 border-blue-400">
+    <section id={name} className="py-5 text-center bg-zinc-900 border-b-8 border-blue-400">
       <motion.div
              initial="hidden"
              animate={controls}

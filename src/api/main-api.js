@@ -161,7 +161,7 @@ export const searchCoins = async (query) => {
       return [];
     }
 
-    // Introduce a delay of 300 milliseconds
+    // Introduce a delay of 300 milliseconds (potentially for debouncing)
     await new Promise(resolve => setTimeout(resolve, 300));
 
     // Make a fetch request to the API

@@ -9,7 +9,6 @@ import {
 import { motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import myLogo from "../../assets/logo2.png";
-import "./navbar.css";
 import { Link } from "react-scroll";
 
 function NavList() {
@@ -122,7 +121,7 @@ export const NavbarSimple = () => {
             src={myLogo}
             alt="Logo of CryptoTracker"
           />
-          <h3 className="text-2xl font-bold leading-none">
+          <h3 className="text-2xl font-bold leading-none md:text-xl">
             Crypto<span className="text-blue-500">Tracker</span>
           </h3>
         </a>
