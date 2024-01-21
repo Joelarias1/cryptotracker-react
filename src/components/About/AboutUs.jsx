@@ -53,7 +53,7 @@ export const AboutUs = ({ name }) => {
   }, [inView, controls]);
 
   return (
-    <section id={name} className="py-10 lg:py-20 bg-stone-100">
+    <section id={name} className="py-10 lg:py-20 bg-zinc-100">
       <motion.div
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6"
         initial="hidden"

@@ -1,10 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  Card,
-  Typography,
-  CardBody,
-  Avatar,
-} from "@material-tailwind/react";
+import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import { getCoinsList } from "../../api/main-api";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
@@ -13,6 +8,7 @@ import { MdOutlineManageSearch } from "react-icons/md";
 import { CoinInformation } from "./CoinData";
 import { percentageValue } from "../../api/utils";
 import { SearchComponent } from "./Search";
+import { Spinner } from "@material-tailwind/react";
 
 const TABLE_HEAD = [
   "Rank",
@@ -31,13 +27,10 @@ const CoinDetailsButton = ({ coinId }) => {
 
   return (
     <>
-      <div>
         <MdOutlineManageSearch
-          className="text-gray-700 text-2xl"
+          className="text-slate-50 text-3xl bg-zinc-600 rounded-3xl p-1 cursor-pointer hover:scale-110"
           onClick={handleOpen}
         />
-      </div>
-
       <CoinInformation
         isOpen={dialogOpen}
         handler={handleOpen}
@@ -50,12 +43,6 @@ const CoinDetailsButton = ({ coinId }) => {
     </>
   );
 };
-
-  const buttonAnimation = {
-    scale: 1.1,
-    transition: { duration: 0.6 },
-  };
-
 
 export const Table = ({ name }) => {
   const [coinsData, setCoinsData] = useState([]);
@@ -84,7 +71,7 @@ export const Table = ({ name }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.15
+    threshold: 0.15,
   });
 
   useEffect(() => {
@@ -110,28 +97,30 @@ export const Table = ({ name }) => {
           </p>
         </div>
 
-        <SearchComponent/>
+        <SearchComponent />
 
-        <div className="flex justify-center items-center mx-3">
+        <div className="flex justify-center items-center mx-2 md:mx-5 mt-5">
           {loading ? (
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-bold text-2xl"
-            >
-              Loading...
-            </Typography>
-          ) : (
             <Card className="w-full xl:w-4/5">
-              <CardBody className="overflow-scroll">
+              <div className="flex items-center justify-center h-full gap-4 py-64">
+                <Typography
+                  variant="h3"
+                  color="blue-gray"
+                  className="font-bold"
+                >
+                  Loading...
+                </Typography>
+                <Spinner color="blue" size="4xl" />
+              </div>
+            </Card>
+          ) : (
+            <Card className="w-full xl:w-4/5 shadow-xl">
+              <CardBody className="overflow-auto scrollbar-thin">
                 <table className="w-full min-w-max table-auto text-left overflow-hidden">
                   <thead>
                     <tr>
                       {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-y border-blue-gray-100 bg-zinc-50 p-4"
-                        >
+                        <th key={head} className="p-4">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -227,12 +216,7 @@ export const Table = ({ name }) => {
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <motion.div
-                            whileHover={buttonAnimation}
-                            className="cursor-pointer"
-                          >
-                            <CoinDetailsButton coinId={coin.id} />
-                          </motion.div>
+                          <CoinDetailsButton coinId={coin.id} />
                         </td>
                       </tr>
                     ))}

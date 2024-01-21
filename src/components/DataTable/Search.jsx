@@ -33,7 +33,6 @@ export const SearchComponent = () => {
     const fetchSearchResults = async () => {
       try {
         if (searchTerm.trim() === "") {
-          // Si la barra de búsqueda está vacía, limpiar los resultados
           setSearchResults([]);
           return;
         }
@@ -45,12 +44,10 @@ export const SearchComponent = () => {
       }
     };
 
-    // Agregar un pequeño retraso antes de realizar la búsqueda
     const searchTimeout = setTimeout(() => {
       fetchSearchResults();
-    }, 300); // Puedes ajustar este valor según tus necesidades
+    }, 300); 
 
-    // Limpiar el timeout en cada cambio de término de búsqueda
     return () => clearTimeout(searchTimeout);
   }, [searchTerm]);
 
