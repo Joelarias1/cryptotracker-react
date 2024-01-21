@@ -1,7 +1,7 @@
 # CryptoTracker on React 🟦
 This project is intended to be shown in my portfolio 😎.
 
-It is mainly a Single Page Application where it will show the prices of different cryptocurrencies through the consumption of Coingecko or Coinmarketcap API 🚀.
+It is mainly a Single Page Application where it will show the prices of different cryptocurrencies through the consumption of Coingecko or Coinmarketcap API 🚀
 
 
 ## Roadmap 👀
@@ -10,14 +10,18 @@ It is mainly a Single Page Application where it will show the prices of differen
 
 - Create an attractive header related to the area ✅ 
 
-- Show prices ✅ 
+- Show prices, marketcap, ath, and more ✅ 
 
 - Create cryptocurrency search engine ✅
+
+- Currency Converter ❌ -> Soon
+
+-  Web3 Integration ❔
 
 
 ## Screenshots 🎞
 
-[![1.png](https://i.postimg.cc/13M0Q4j6/1.png)](https://postimg.cc/BjLP5ZsQ)
+[![1.png](https://i.postimg.cc/wBBFRC6R/1.png)](https://postimg.cc/LJrjr0gm)
 
 [![2.png](https://i.postimg.cc/C5ykN8Ry/2.png)](https://postimg.cc/7GV5Pf1X)
 
