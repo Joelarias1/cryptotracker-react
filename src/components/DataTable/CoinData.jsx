@@ -107,7 +107,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   color="blue-gray"
                   className="font-bold text-2xl sm:text-3xl md:text-3xl"
                 >
-                  $ {coinInfo.price || 0}
+                   {coinInfo.price || 0}
                 </Typography>
                 <div className="flex items-center">
                   <Typography
@@ -131,7 +131,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   color="blue-gray"
                   className="font-medium text-base sm:text-lg md:text-md"
                 >
-                  ATH: $ {coinInfo.ath || "$ 0"}
+                  ATH:  {coinInfo.ath || " 0"}
                 </Typography>
                 <div className="flex items-center">
                   <Typography

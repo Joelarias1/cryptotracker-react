@@ -13,12 +13,11 @@ import { Link } from "react-scroll";
 
 function NavList() {
   return (
-    <ul className="my-8 mx-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium text-white"
       >
         <Link
           to="header"
@@ -30,7 +29,11 @@ function NavList() {
         </Link>
       </Typography>
 
-      <Typography as="li" variant="small" className="p-1 font-medium">
+      <Typography 
+        as="li" 
+        variant="small" 
+        className="p-1 font-medium text-white"
+      >
         <Link
           to="about-us"
           smooth={true}
@@ -44,8 +47,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium text-white"
       >
         <Link
           to="market"
@@ -60,8 +62,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
+        className="p-1 font-medium text-white"
       >
         <Link
           to="tech"
@@ -74,48 +75,70 @@ function NavList() {
       </Typography>
 
       <li className="p-1 font-medium">
-      <motion.div
-        whileTap={{
-          scale: 0.75,
-          borderRadius: "50%",
-        }}
-        whileHover={{
-          scale: 1.1,
-        }}
-        transition={{ duration: 0.2 }}
-      >
-        <Button
-          ripple
-          className="mt-4 lg:mt-0 ml-auto text-xs rounded-2xl font-medium bg-blue-600"
-          disabled
+        <motion.div
+          whileTap={{
+            scale: 0.75,
+            borderRadius: "50%",
+          }}
+          whileHover={{
+            scale: 1.1,
+          }}
+          transition={{ duration: 0.2 }}
         >
-          Soon 🦊
-        </Button>
-      </motion.div>
+          <Button
+            ripple
+            className="w-full lg:w-auto text-xs rounded-2xl font-medium bg-blue-600"
+            disabled
+          >
+            Soon 🦊
+          </Button>
+        </motion.div>
       </li>
     </ul>
   );
 }
 
-
 export const NavbarSimple = () => {
   const [openNav, setOpenNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
 
   const handleWindowResize = () =>
-    window.innerWidth >= 960 && setOpenNav(false);
+    window.innerWidth >= 768 && setOpenNav(false);
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("resize", handleWindowResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <Navbar className="h-max max-w-full px-6 py-3 fixed z-50 rounded-none bg-neutral-900 border-none shadow-none">
+    <Navbar 
+      className={`h-max max-w-full px-6 py-3 fixed z-50 rounded-none border-none transition-all duration-300 ${
+        scrolled || openNav
+          ? "bg-neutral-900/95 backdrop-blur-sm shadow-lg" 
+          : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center justify-between text-white">
-        <a className="flex items-center gap-2" href="#">
+        <motion.a 
+          className="flex items-center gap-2" 
+          href="#"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+        >
           <img
             className="w-auto h-11"
             src={myLogo}
@@ -124,7 +147,7 @@ export const NavbarSimple = () => {
           <h3 className="text-2xl font-bold leading-none md:text-xl">
             Crypto<span className="text-blue-500">Tracker</span>
           </h3>
-        </a>
+        </motion.a>
         <div className="hidden lg:block">
           <NavList />
         </div>
@@ -142,7 +165,9 @@ export const NavbarSimple = () => {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <div className="p-4 rounded-lg mt-2">
+          <NavList />
+        </div>
       </Collapse>
     </Navbar>
   );
