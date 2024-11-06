@@ -15,13 +15,13 @@ import { getCoinInfo } from "../../api/main-api";
 export function CoinInformation({ isOpen, handler, coinId }) {
   const [coinInfo, setCoinInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [timeframe, setTimeframe] = useState('7');
+  const [timeframe, setTimeframe] = useState("7");
 
   const timeframes = [
-    { label: '24h', value: '1' },
-    { label: '7d', value: '7' },
-    { label: '30d', value: '30' },
-    { label: '1y', value: '365' },
+    { label: "24h", value: "1" },
+    { label: "7d", value: "7" },
+    { label: "30d", value: "30" },
+    { label: "1y", value: "365" },
   ];
 
   useEffect(() => {
@@ -44,19 +44,29 @@ export function CoinInformation({ isOpen, handler, coinId }) {
 
   const PriceChangeIndicator = ({ value, size = "normal" }) => {
     const isPositive = !value?.startsWith('-');
-    const baseClasses = "flex items-center gap-1 rounded-full px-2 py-0.5";
-    const sizeClasses = size === "small" ? "text-xs" : "text-sm";
-    const colorClasses = isPositive ? "bg-green-50" : "bg-red-50";
-
+    const baseClasses = "inline-flex items-center gap-1";
+    const sizeClasses = size === "small" 
+      ? "text-xs px-1.5 py-0.5 rounded-md" 
+      : "text-sm px-2 py-1 rounded-lg font-medium";
+    
     return (
-      <div className={`${baseClasses} ${colorClasses} ${sizeClasses}`}>
-        <span className={isPositive ? "text-green-600" : "text-red-600"}>
+      <div
+        className={`
+          ${baseClasses} 
+          ${sizeClasses}
+          ${isPositive 
+            ? 'bg-green-50 text-green-600' 
+            : 'bg-red-50 text-red-600'
+          }
+        `}
+      >
+        <span className="tracking-tight">
           {value || '0%'}
         </span>
         {value?.startsWith('-') ? (
-          <BiSolidDownArrow className="text-red-500 w-3 h-3" />
+          <BiSolidDownArrow className="w-2.5 h-2.5" />
         ) : (
-          <BiSolidUpArrow className="text-green-500 w-3 h-3" />
+          <BiSolidUpArrow className="w-2.5 h-2.5" />
         )}
       </div>
     );
@@ -75,61 +85,85 @@ export function CoinInformation({ isOpen, handler, coinId }) {
         </div>
       ) : coinInfo ? (
         <div className="flex flex-col w-full">
-          <DialogHeader className="bg-gray-50 p-4 lg:p-6">
-            <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-6">
-              {/* Información básica de la moneda */}
-              <div className="flex items-start gap-4">
-                <Avatar
-                  src={coinInfo.image}
-                  alt={coinInfo.name}
-                  className="w-12 h-12 sm:w-16 sm:h-16 bg-white p-1.5 ring-1 ring-gray-100"
-                />
-                <div className="flex flex-col min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Typography className="font-bold text-gray-900 text-lg sm:text-xl">
-                      {coinInfo.name}
-                    </Typography>
-                    <div className="flex gap-1.5">
-                      <span className="px-2 py-0.5 bg-gray-700 text-white rounded-full text-xs font-medium">
-                        {coinInfo.symbol}
-                      </span>
-                      <span className="px-2 py-0.5 bg-gray-600 text-white rounded-full text-xs font-medium">
+          {/* Seccion superior */}
+          <DialogHeader className="bg-gray-50/80 p-4 lg:p-6 backdrop-blur-sm">
+            <div className="w-full flex flex-col lg:flex-row items-start gap-4 lg:gap-6">
+              {/* Sección izquierda: Info básica */}
+              <div className="flex items-center gap-4 w-full lg:w-auto">
+                <div className="relative">
+                  <Avatar
+                    src={coinInfo.image}
+                    alt={coinInfo.name}
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm ring-1 ring-gray-100 p-2"
+                  />
+                  {coinInfo.rank <= 3 && (
+                    <div className="absolute -top-1 -right-1 bg-yellow-400 w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+                      <span className="text-xs font-bold text-white">
                         #{coinInfo.rank}
                       </span>
                     </div>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-2 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Typography className="font-bold text-gray-900 text-xl sm:text-2xl tracking-tight">
+                      {coinInfo.name}
+                    </Typography>
+                    <div className="flex items-center gap-1.5">
+                      <span className="px-2 py-0.5 bg-gray-800 text-white rounded-md text-xs font-semibold uppercase tracking-wide">
+                        {coinInfo.symbol}
+                      </span>
+                      {coinInfo.rank > 3 && (
+                        <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md text-xs font-medium">
+                          Rank #{coinInfo.rank}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-2">
+
+                  <div className="flex items-center gap-3">
                     <a
                       href={coinInfo.linkHome}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-700 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors bg-white/80 hover:bg-white px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm"
                     >
                       <CiLink className="text-base" />
-                      Sitio web oficial
+                      Official Website
                     </a>
+                    {/* Aquí podrías agregar más acciones como Add to Watchlist */}
                   </div>
                 </div>
               </div>
 
-              {/* Información de precios */}
-              <div className="flex flex-col lg:ml-auto mt-3 lg:mt-0">
-                <div className="flex flex-col gap-1">
-                  {/* Precio actual */}
-                  <div className="flex items-center gap-2">
-                    <Typography className="text-2xl lg:text-3xl font-bold text-gray-900 tabular-nums">
-                      {coinInfo.price || '$0.00'}
-                    </Typography>
-                    <PriceChangeIndicator value={coinInfo.price24h} />
-                  </div>
-                  {/* ATH */}
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <span className="text-xs text-gray-500">ATH:</span>
-                    <span className="text-sm font-medium text-gray-700 tabular-nums">
-                      {coinInfo.ath || '$0.00'}
+              {/* Sección derecha: Precios */}
+              <div className="flex flex-col lg:ml-auto lg:items-end w-full lg:w-auto bg-white/60 p-3 rounded-xl lg:bg-transparent lg:p-0">
+                {/* Precio actual y cambio 24h */}
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <Typography className="text-2xl lg:text-3xl font-bold text-gray-900 tabular-nums tracking-tight">
+                    {coinInfo.price || "$0.00"}
+                  </Typography>
+                  <PriceChangeIndicator
+                    value={coinInfo.price24h}
+                    className="lg:-mt-1"
+                  />
+                </div>
+
+                {/* ATH */}
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-lg lg:bg-transparent lg:px-0">
+                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                      ATH
                     </span>
-                    <PriceChangeIndicator value={coinInfo.athChange} size="small" />
+                    <span className="text-sm font-semibold text-gray-700 tabular-nums">
+                      {coinInfo.ath || "$0.00"}
+                    </span>
                   </div>
+                  <PriceChangeIndicator
+                    value={coinInfo.athChange}
+                    size="small"
+                  />
                 </div>
               </div>
             </div>
@@ -144,8 +178,8 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   onClick={() => setTimeframe(tf.value)}
                   className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors duration-200 ${
                     timeframe === tf.value
-                      ? 'bg-green-100 text-green-600'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      ? "bg-green-100 text-green-600"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
                 >
                   {tf.label}
@@ -161,7 +195,9 @@ export function CoinInformation({ isOpen, handler, coinId }) {
           <div className="bg-gray-800 text-white p-4 lg:p-6">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
               <div className="flex flex-col">
-                <span className="text-gray-400 text-xs">Circulating Supply</span>
+                <span className="text-gray-400 text-xs">
+                  Circulating Supply
+                </span>
                 <span className="text-sm lg:text-base font-medium mt-0.5 tabular-nums">
                   {coinInfo.totalSupply}
                 </span>
