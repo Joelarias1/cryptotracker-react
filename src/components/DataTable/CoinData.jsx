@@ -94,7 +94,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                   <Avatar
                     src={coinInfo.image}
                     alt={coinInfo.name}
-                    className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm ring-1 ring-gray-100 p-2"
+                    className="w-14 h-14 sm:w-14 sm:h-14 bg-white shadow-sm ring-1 ring-gray-100 p-2 object-contain"
                   />
                   {coinInfo.rank <= 3 && (
                     <div className="absolute -top-1 -right-1 bg-yellow-400 w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
