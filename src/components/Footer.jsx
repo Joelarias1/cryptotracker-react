@@ -36,7 +36,7 @@ const Footer = () => {
   }, [inView, controls]);
 
   return (
-    <footer className="bg-zinc-850 relative overflow-hidden">
+    <footer className="bg-zinc-800 relative overflow-hidden">
       <div className="absolute inset-0 bg-neutral-500/5 backdrop-filter backdrop-blur-3xl"></div>
       <motion.div
         className="container px-6 py-12 mx-auto relative z-10"
