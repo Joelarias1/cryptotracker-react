@@ -19,7 +19,12 @@ const API_CONFIG = {
 const CACHE_DURATION = 60000; // 1 minuto
 const cache = new Map();
 
-
+const CACHE_DURATIONS = {
+  '1': 30000,    // 30 segundos para datos de 24h
+  '7': 60000,    // 1 minuto para datos de 7 días
+  '30': 300000,  // 5 minutos para datos de 30 días
+  '365': 900000, // 15 minutos para datos anuales
+};
 
 // Utilidades
 const createUrl = (endpoint, params = {}) => {
@@ -67,7 +72,7 @@ const handleApiError = (error, endpoint) => {
 
 
 // Funciones de formato
-const formatPrice = (value) => {
+export const formatPrice = (value) => {
   const parsedValue = parseFloat(value);
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -240,4 +245,38 @@ export const searchCoins = async (query) => {
   };
 
   return fetchWithCache(cacheKey, fetchSearchResults);
+};
+
+// Endpoints para Graficos
+export const getCoinHistoricalData = async (coinId, days = '7', vs_currency = 'usd') => {
+  const cacheKey = `historical_${coinId}_${days}_${vs_currency}`;
+  const cacheDuration = CACHE_DURATIONS[days] || 60000; // Default a 1 minuto
+  
+  return fetchWithCache(cacheKey, async () => {
+    try {
+      const params = {
+        vs_currency: vs_currency,
+        days: days
+      };
+
+      const url = createUrl(`/coins/${coinId}/market_chart`, params);
+      const response = await fetch(url.toString(), API_CONFIG.DEFAULT_OPTIONS);
+      const data = await handleApiResponse(response);
+
+      const formattedData = data.prices.map(([timestamp, price]) => ({
+        timestamp,
+        date: new Date(timestamp).toLocaleDateString(),
+        price: parseFloat(price)
+      }));
+
+      return {
+        labels: formattedData.map(item => item.date),
+        prices: formattedData.map(item => item.price)
+      };
+
+    } catch (error) {
+      handleApiError(error, `/coins/${coinId}/market_chart`);
+      return null;
+    }
+  }, cacheDuration);
 };

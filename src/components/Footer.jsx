@@ -109,7 +109,7 @@ const Footer = () => {
           <Typography
             variant="small"
             color="blue-gray"
-            className="text-black ml-4 font-medium"
+            className="text-black ml-4 font-normal"
           >
             © 2023 CryptoTracker. All rights reserved.
           </Typography>

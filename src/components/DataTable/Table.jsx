@@ -150,7 +150,7 @@ export const Table = ({ name }) => {
                               src={coin.image}
                               alt={coin.name}
                               size="md"
-                              className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                              className="border border-blue-gray-100 bg-blue-gray-50/50 object-contain p-1"
                             />
                             <Typography
                               variant="small"

@@ -19,14 +19,14 @@ const Header = ({ name }) => {
 
   return (
     <motion.header
-      className="px-4 py-64 text-center" // Quitamos md:px-12 lg:text-left para mantener centrado
+      className="px-4 py-60 text-center"
       initial="hidden"
       animate={controls}
       variants={motionVariants}
       id={name}
     >
       <div className="px-4 md:px-12 mx-auto max-w-7xl">
-        <div className="w-full mx-auto md:w-11/12 xl:w-9/12 text-center"> {/* Mantenemos text-center */}
+        <div className="w-full mx-auto md:w-11/12 xl:w-9/12 text-center">
           <h1 className="mb-8 text-4xl font-extrabold leading-tight tracking-normal text-slate-50 md:text-6xl md:tracking-tight">
             <span className="block">Watch</span>
             <span className="block py-2 text-transparent animate-gradient">
@@ -38,7 +38,7 @@ const Header = ({ name }) => {
             All your assets, in one place. Have the information you want about your 
             favorite assets, prices, capitalization, new releases at the click of a button.
           </p>
-          <div className="mb-4 flex justify-center"> {/* Centramos el botón */}
+          <div className="mb-4 flex justify-center"> 
             <Link
               to="market" 
               spy={true}

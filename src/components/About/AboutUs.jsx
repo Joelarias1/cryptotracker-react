@@ -61,7 +61,7 @@ export const AboutUs = ({ name }) => {
         variants={sectionAnimation}
         ref={ref}
       >
-        <div className="flex flex-wrap ">
+        <div className="flex flex-wrap">
           <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0 ">
             <div className="lg:max-w-md">
               <div className="px-4 pl-4 mb-6 border-l-4 border-blue-500">
@@ -72,7 +72,7 @@ export const AboutUs = ({ name }) => {
                   About Us
                 </h1>
               </div>
-              <p className="px-4 mb-10 text-base leading-7 text-gray-500 dark:text-gray-400">
+              <p className="px-4 mb-10 text-md leading-7 text-gray-500 dark:text-gray-400">
                 This is a demo project created for my portfolio showcasing
                 real-time cryptocurrency prices.
                 <br />
@@ -84,7 +84,7 @@ export const AboutUs = ({ name }) => {
               <div className="flex flex-wrap items-center">
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <motion.div
-                    className="p-6 bg-white  border-b-4 border-blue-500"
+                    className="p-6 bg-white  border-b-4 border-blue-500 rounded-xl"
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
@@ -97,7 +97,7 @@ export const AboutUs = ({ name }) => {
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <motion.div
-                    className="p-6 bg-white border-b-4 border-blue-500"
+                    className="p-6 bg-white border-b-4 border-blue-500 rounded-xl"
                     whileHover={cardsAnimation}
                   >
                     <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
@@ -110,10 +110,10 @@ export const AboutUs = ({ name }) => {
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <motion.div
-                    className="p-6 bg-white border-b-4 border-blue-500"
+                    className="p-6 bg-white border-b-4 border-blue-500 rounded-xl"
                     whileHover={cardsAnimation}
                   >
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700">
                       {loading ? <Spinner color="blue" size="4xl" />: marketData.totalExchanges || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
@@ -123,10 +123,10 @@ export const AboutUs = ({ name }) => {
                 </div>
                 <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                   <motion.div
-                    className="p-6 bg-white border-b-4 border-blue-500"
+                    className="p-6 bg-white border-b-4 border-blue-500 rounded-xl"
                     whileHover={cardsAnimation}
                   >
-                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700 ">
+                    <p className="mt-4 mb-2 text-3xl font-bold text-gray-700">
                       {loading ? <Spinner color="blue" size="4xl" /> : marketData.icos || 0}
                     </p>
                     <h2 className="text-md text-gray-700 font-medium">
@@ -138,10 +138,12 @@ export const AboutUs = ({ name }) => {
             </div>
           </div>
           <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-            <Lottie
-              animationData={animation}
-              className="relative z-40 object-cover w-full h-full"
-            />
+            <div className="aspect-square sm:aspect-video md:aspect-[4/3] lg:aspect-square">
+              <Lottie
+                animationData={animation}
+                className="relative z-40 w-full h-full"
+              />
+            </div>
           </div>
         </div>
       </motion.div>
