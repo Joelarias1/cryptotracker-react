@@ -1,70 +1,70 @@
 /* Header.css */
 .animate-gradient {
-    background: linear-gradient(
-      270deg,
+  background: linear-gradient(270deg,
       #3b82f6,
       #93c5fd,
       #3b82f6,
-      #93c5fd
-    );
-    background-size: 200% auto;
-    animation: gradient 3s linear infinite;
-    -webkit-background-clip: text;
-  }
-  
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+      #93c5fd);
+  background-size: 200% auto;
+  animation: gradient 3s linear infinite;
+  -webkit-background-clip: text;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
 
-  .glow-button {
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    border: 2px solid transparent;
+  50% {
+    background-position: 100% 50%;
   }
-  
-  .glow-button:before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: -2px;
-    background: linear-gradient(
-      45deg,
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glow-button {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.glow-button:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  background: linear-gradient(45deg,
       #1e3a8a,
       #2563eb,
       #1e40af,
-      #1e3a8a
-    );
-    background-size: 200%;
-    animation: glowingBorder 3s linear infinite;
-    filter: blur(8px);
-    opacity: 0.8;
-  }
-  
- 
-  .glow-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #2563eb,
-                0 0 40px rgba(37, 99, 235, 0.5);
-  }
-  
-  .glow-button:hover:before {
-    filter: blur(12px);
-    opacity: 1;
-  }
-  
-  @keyframes glowingBorder {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
+      #1e3a8a);
+  background-size: 200%;
+  animation: glowingBorder 3s linear infinite;
+  filter: blur(8px);
+  opacity: 0.8;
+}
+
+
+.glow-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #2563eb,
+    0 0 40px rgba(37, 99, 235, 0.5);
+}
+
+.glow-button:hover:before {
+  filter: blur(12px);
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}

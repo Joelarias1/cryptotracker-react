@@ -138,13 +138,13 @@ export const BrandsSection = ({ name }) => {
   return (
     <section
       id={name}
-      className="relative py-12 bg-gradient-to-b from-zinc-900 to-zinc-800 overflow-hidden min-h-screen flex flex-col"
+      className="relative py-12 bg-gradient-to-b from-neutral-900 to-neutral-800 overflow-hidden min-h-screen flex flex-col"
     >
       <div className="absolute inset-0">
-        <div className="absolute -top-4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-zinc-900 via-zinc-900/80 to-transparent z-10"></div>
+        <div className="absolute -top-4 left-1/4 w-96 h-96 bg-neutral-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-transparent z-10"></div>
         <div
-          className="absolute -bottom-4 right-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse"
+          className="absolute -bottom-4 right-1/4 w-96 h-96 bg-neutral-400/10 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "1s" }}
         ></div>
       </div>

@@ -129,7 +129,7 @@ export const NavbarSimple = () => {
       className={`h-max max-w-full px-6 py-3 fixed z-50 rounded-none border-none transition-all duration-300 ${
         scrolled || openNav
           ? "bg-neutral-900/95 backdrop-blur-sm shadow-lg" 
-          : "bg-transparent"
+          : "bg-neutral-900/60"
       }`}
     >
       <div className="flex items-center justify-between text-white">
