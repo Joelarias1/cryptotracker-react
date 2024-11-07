@@ -87,18 +87,19 @@ export const SearchComponent = () => {
         {/* Input */}
         <div className="relative">
           <Input
+            type="text"
             placeholder="Search..."
+            className="!border !border-white/10 bg-white/5 backdrop-blur-md text-white shadow-lg placeholder:text-neutral-400 focus:!border-white/20 w-full !ring-0 pl-10" // Añadido pl-10 para dejar espacio al ícono
             labelProps={{
               className: "hidden",
             }}
-            icon={<MagnifyingGlassIcon className="h-5 w-5 text-neutral-400" />}
-            className="!border !border-white/10 bg-white/5 backdrop-blur-md text-white shadow-lg placeholder:text-neutral-400 focus:!border-white/20 w-full !ring-0"
             containerProps={{
               className: "min-w-[200px]"
             }}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <MagnifyingGlassIcon className="h-5 w-5 text-neutral-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
         </div>
 
         {/* Results dropdown */}

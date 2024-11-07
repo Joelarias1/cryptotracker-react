@@ -84,12 +84,12 @@ export const Table = ({ name }) => {
       >
         <div className="flex flex-col items-center justify-center px-4 mb-12">
           <div className="relative">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-lg blur-lg"></div>
-            <h1 className="relative text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400/90 via-purple-400/90 to-blue-400/90 md:text-5xl">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-lg blur-xl"></div>
+            <h1 className="relative  text-center text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 md:text-5xl px-1 py-2">
               Cryptocurrency Prices
             </h1>
           </div>
-          <p className="mt-4 text-base md:text-lg text-neutral-300/80 max-w-2xl text-center">
+          <p className="text-base md:text-lg text-neutral-300/80 max-w-2xl text-center">
             Real-time prices of top cryptocurrencies
           </p>
         </div>
@@ -135,13 +135,14 @@ export const Table = ({ name }) => {
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-white/10 p-1.5 backdrop-blur-sm border border-white/10">
+                            <div className="w-10 h-10 rounded-full bg-white/10 p-1.5 backdrop-blur-sm border border-white/10 overflow-hidden">
                               <img
                                 src={coin.image}
                                 alt={coin.name}
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-cover"
                               />
                             </div>
+
                             <div className="flex flex-col">
                               <span className="text-sm font-semibold text-slate-50">
                                 {coin.name}

@@ -1,10 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  Dialog,
-  DialogHeader,
-  Typography,
-  Avatar,
-} from "@material-tailwind/react";
+import { Dialog, DialogHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
@@ -43,27 +38,27 @@ export function CoinInformation({ isOpen, handler, coinId }) {
   }, [isOpen, coinId]);
 
   const PriceChangeIndicator = ({ value, size = "normal" }) => {
-    const isPositive = !value?.startsWith('-');
+    const isPositive = !value?.startsWith("-");
     const baseClasses = "inline-flex items-center gap-1";
-    const sizeClasses = size === "small" 
-      ? "text-xs px-1.5 py-0.5 rounded-md" 
-      : "text-sm px-2 py-1 rounded-lg font-medium";
-    
+    const sizeClasses =
+      size === "small"
+        ? "text-xs px-1.5 py-0.5 rounded-md"
+        : "text-sm px-2 py-1 rounded-lg font-medium";
+
     return (
       <div
         className={`
           ${baseClasses} 
           ${sizeClasses}
-          ${isPositive 
-            ? 'bg-green-50 text-green-600' 
-            : 'bg-red-50 text-red-600'
+          ${
+            isPositive
+              ? "bg-green-400/10 text-green-400"
+              : "bg-red-400/10 text-red-400"
           }
         `}
       >
-        <span className="tracking-tight">
-          {value || '0%'}
-        </span>
-        {value?.startsWith('-') ? (
+        <span className="tracking-tight">{value || "0%"}</span>
+        {value?.startsWith("-") ? (
           <BiSolidDownArrow className="w-2.5 h-2.5" />
         ) : (
           <BiSolidUpArrow className="w-2.5 h-2.5" />
@@ -76,7 +71,7 @@ export function CoinInformation({ isOpen, handler, coinId }) {
     <Dialog
       open={isOpen}
       handler={handler}
-      className="bg-white max-h-[95vh] overflow-auto rounded-xl m-2 sm:m-4"
+      className="bg-neutral-900/95 backdrop-blur-xl max-h-[95vh] overflow-auto rounded-xl m-2 sm:m-4 border border-white/10"
       size="xl"
     >
       {loading ? (
@@ -85,19 +80,30 @@ export function CoinInformation({ isOpen, handler, coinId }) {
         </div>
       ) : coinInfo ? (
         <div className="flex flex-col w-full">
-          {/* Seccion superior */}
-          <DialogHeader className="bg-gray-50/80 p-4 lg:p-6 backdrop-blur-sm">
+          {/* Header section */}
+          <DialogHeader className="bg-white/5 p-4 lg:p-6 backdrop-blur-sm border-b border-white/10">
             <div className="w-full flex flex-col lg:flex-row items-start gap-4 lg:gap-6">
-              {/* Sección izquierda: Info básica */}
+              {/* Left section: Basic info */}
               <div className="flex items-center gap-4 w-full lg:w-auto">
                 <div className="relative">
-                  <Avatar
-                    src={coinInfo.image}
-                    alt={coinInfo.name}
-                    className="w-14 h-14 sm:w-14 sm:h-14 bg-white shadow-sm ring-1 ring-gray-100 p-2 object-contain"
-                  />
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
+
+                    {/* Container for the image */}
+                    <div className="absolute inset-0 p-2.5 backdrop-blur-[2px]">
+                      <div className="w-full h-full rounded-full bg-white/10 p-1.5 backdrop-filter overflow-hidden">
+                        <img
+                          src={coinInfo.image}
+                          alt={coinInfo.name}
+                          className="w-full h-full object-fit"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   {coinInfo.rank <= 3 && (
-                    <div className="absolute -top-1 -right-1 bg-yellow-400 w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+                    <div className="absolute -top-1 -right-1 bg-gradient-to-br from-yellow-400 to-yellow-600 w-5 h-5 rounded-full flex items-center justify-center border border-white/20">
                       <span className="text-xs font-bold text-white">
                         #{coinInfo.rank}
                       </span>
@@ -107,15 +113,15 @@ export function CoinInformation({ isOpen, handler, coinId }) {
 
                 <div className="flex flex-col gap-2 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Typography className="font-bold text-gray-900 text-xl sm:text-2xl tracking-tight">
+                    <span className="font-bold text-white text-xl sm:text-2xl tracking-tight">
                       {coinInfo.name}
-                    </Typography>
+                    </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 bg-gray-800 text-white rounded-md text-xs font-semibold uppercase tracking-wide">
+                      <span className="px-2 py-0.5 bg-blue-400/10 text-blue-400 rounded-md text-xs font-semibold uppercase tracking-wide">
                         {coinInfo.symbol}
                       </span>
                       {coinInfo.rank > 3 && (
-                        <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md text-xs font-medium">
+                        <span className="px-2 py-0.5 bg-white/5 text-neutral-300 rounded-md text-xs font-medium">
                           Rank #{coinInfo.rank}
                         </span>
                       )}
@@ -127,36 +133,33 @@ export function CoinInformation({ isOpen, handler, coinId }) {
                       href={coinInfo.linkHome}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors bg-white/80 hover:bg-white px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10"
                     >
                       <CiLink className="text-base" />
                       Official Website
                     </a>
-                    {/* Aquí podrías agregar más acciones como Add to Watchlist */}
                   </div>
                 </div>
               </div>
 
-              {/* Sección derecha: Precios */}
-              <div className="flex flex-col lg:ml-auto lg:items-end w-full lg:w-auto bg-white/60 p-3 rounded-xl lg:bg-transparent lg:p-0">
-                {/* Precio actual y cambio 24h */}
+              {/* Right section: Prices */}
+              <div className="flex flex-col lg:ml-auto lg:items-end w-full lg:w-auto bg-white/5 p-3 rounded-xl lg:bg-transparent lg:p-0">
                 <div className="flex items-baseline gap-3 flex-wrap">
-                  <Typography className="text-2xl lg:text-3xl font-bold text-gray-900 tabular-nums tracking-tight">
+                  <span className="text-2xl lg:text-3xl font-bold text-white tabular-nums tracking-tight">
                     {coinInfo.price || "$0.00"}
-                  </Typography>
+                  </span>
                   <PriceChangeIndicator
                     value={coinInfo.price24h}
                     className="lg:-mt-1"
                   />
                 </div>
 
-                {/* ATH */}
                 <div className="flex items-center gap-2 mt-2">
-                  <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-lg lg:bg-transparent lg:px-0">
-                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                  <div className="flex items-center gap-1.5 bg-white/5 px-2 py-1 rounded-lg lg:bg-transparent lg:px-0">
+                    <span className="text-xs font-medium text-neutral-400 uppercase tracking-wide">
                       ATH
                     </span>
-                    <span className="text-sm font-semibold text-gray-700 tabular-nums">
+                    <span className="text-sm font-semibold text-neutral-200 tabular-nums">
                       {coinInfo.ath || "$0.00"}
                     </span>
                   </div>
@@ -169,50 +172,50 @@ export function CoinInformation({ isOpen, handler, coinId }) {
             </div>
           </DialogHeader>
 
-          {/* Sección del gráfico */}
+          {/* Chart section */}
           <div className="p-4 lg:p-6">
             <div className="flex justify-end gap-1.5 mb-4">
               {timeframes.map((tf) => (
                 <button
                   key={tf.value}
                   onClick={() => setTimeframe(tf.value)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors duration-200 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors duration-200 border-white/10 ${
                     timeframe === tf.value
-                      ? "bg-green-100 text-green-600"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      ? "bg-blue-400/10 text-blue-400"
+                      : "bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-neutral-300 "
                   }`}
                 >
                   {tf.label}
                 </button>
               ))}
             </div>
-            <div className="h-[250px] sm:h-[300px] lg:h-[400px] w-full">
+            <div className="h-[250px] sm:h-[300px] lg:h-[400px] w-full bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-4">
               <CoinChart coinId={coinId} timeframe={timeframe} />
             </div>
           </div>
 
-          {/* Estadísticas del footer */}
-          <div className="bg-gray-800 text-white p-4 lg:p-6">
+          {/* Footer stats */}
+          <div className="bg-white/5 backdrop-blur-sm border-t border-white/10 text-white p-4 lg:p-6">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
               <div className="flex flex-col">
-                <span className="text-gray-400 text-xs">
+                <span className="text-neutral-400 text-xs">
                   Circulating Supply
                 </span>
-                <span className="text-sm lg:text-base font-medium mt-0.5 tabular-nums">
+                <span className="text-sm lg:text-base font-medium mt-0.5 tabular-nums text-white">
                   {coinInfo.totalSupply}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-gray-400 text-xs">Max Supply</span>
-                <span className="text-sm lg:text-base font-medium mt-0.5 tabular-nums">
+                <span className="text-neutral-400 text-xs">Max Supply</span>
+                <span className="text-sm lg:text-base font-medium mt-0.5 tabular-nums text-white">
                   {coinInfo.maxSupply}
                 </span>
               </div>
               <div className="flex flex-col col-span-2 lg:col-span-1">
-                <span className="text-gray-400 text-xs">Watchlist</span>
-                <span className="text-sm lg:text-base font-medium mt-0.5 flex items-center gap-1.5 tabular-nums">
+                <span className="text-neutral-400 text-xs">Watchlist</span>
+                <span className="text-sm lg:text-base font-medium mt-0.5 flex items-center gap-1.5 tabular-nums text-white">
                   {coinInfo.userWatchlist}
-                  <FaStar className="text-yellow-500 w-4 h-4" />
+                  <FaStar className="text-yellow-400 w-4 h-4" />
                 </span>
               </div>
             </div>

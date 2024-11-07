@@ -134,9 +134,9 @@ export function CoinChart({ coinId, timeframe }) {
       },
       tooltip: {
         enabled: true,
-        backgroundColor: "rgba(255, 255, 255, 0.98)",
-        titleColor: "#374151",
-        bodyColor: "#111827",
+        backgroundColor: "rgba(17, 17, 17, 0.95)", // Fondo oscuro
+        titleColor: "#ffffff", // Texto blanco
+        bodyColor: "#ffffff", // Texto blanco
         titleFont: {
           size: 12,
           weight: "500",
@@ -151,7 +151,7 @@ export function CoinChart({ coinId, timeframe }) {
           x: 12,
           y: 8,
         },
-        borderColor: "rgba(0, 0, 0, 0.1)",
+        borderColor: "rgba(255, 255, 255, 0.1)", // Borde blanco transparente
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
@@ -192,7 +192,7 @@ export function CoinChart({ coinId, timeframe }) {
       y: {
         position: "right",
         grid: {
-          color: "rgba(0, 0, 0, 0.03)",
+          color: "rgba(255, 255, 255, 0.05)", // Líneas de grid más sutiles
           drawBorder: false,
         },
         border: {
@@ -204,7 +204,7 @@ export function CoinChart({ coinId, timeframe }) {
             weight: "500",
             family: "'Inter', sans-serif",
           },
-          color: "rgba(0, 0, 0, 0.7)",
+          color: "rgba(255, 255, 255, 0.7)", // Texto de los valores en blanco transparente
           callback: (value) => formatPrice(value),
           padding: 12,
           count: 5,
@@ -217,9 +217,9 @@ export function CoinChart({ coinId, timeframe }) {
 
   if (loading && !chartData) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-white bg-opacity-80">
+      <div className="w-full h-full flex items-center justify-center bg-transparent">
         <div className="relative w-12 h-12">
-          <div className="absolute w-full h-full border-4 border-gray-100 rounded-full"></div>
+          <div className="absolute w-full h-full border-4 border-neutral-800 rounded-full"></div>
           <div className="absolute w-full h-full border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
         </div>
       </div>
@@ -228,7 +228,7 @@ export function CoinChart({ coinId, timeframe }) {
 
   if (!chartData) {
     return (
-      <div className="w-full h-full flex items-center justify-center text-gray-500 font-medium">
+      <div className="w-full h-full flex items-center justify-center text-neutral-400 font-medium">
         No data available
       </div>
     );
@@ -240,7 +240,7 @@ export function CoinChart({ coinId, timeframe }) {
         ref={chartRef}
         data={chartData}
         options={options}
-        className="filter drop-shadow-sm"
+        className="filter drop-shadow-xl"
       />
     </div>
   );
