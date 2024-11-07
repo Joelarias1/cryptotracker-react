@@ -41,6 +41,12 @@ export const BrandsSection = ({ name }) => {
       title: "Framer Motion",
       width: "w-32",
     },
+    {
+      src: "https://vitejs.dev/logo.svg",
+      alt: "Vite",
+      title: "Vite",
+      width: "w-25",
+    },
   ];
 
   const LogoCard = ({ logo }) => {
