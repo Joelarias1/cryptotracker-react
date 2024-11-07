@@ -232,7 +232,7 @@ export const Table = ({ name }) => {
                                 <img
                                   src={coin.image}
                                   alt={coin.name}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full rounded-full object-cover scale-[1.15]"
                                 />
                               </motion.div>
 

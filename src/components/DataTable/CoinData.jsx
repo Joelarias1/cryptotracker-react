@@ -92,12 +92,18 @@ export function CoinInformation({ isOpen, handler, coinId }) {
 
                     {/* Container for the image */}
                     <div className="absolute inset-0 p-2.5 backdrop-blur-[2px]">
-                      <div className="w-full h-full rounded-full bg-white/10 p-1.5 backdrop-filter overflow-hidden">
-                        <img
-                          src={coinInfo.image}
-                          alt={coinInfo.name}
-                          className="w-full h-full object-fit"
-                        />
+                      <div className="relative w-full h-full rounded-full bg-white/10 p-1.5 backdrop-filter">
+                        <div className="w-full h-full rounded-full overflow-hidden">
+                          <img
+                            src={coinInfo.image}
+                            alt={coinInfo.name}
+                            className="w-full h-full rounded-full object-cover scale-[1.15]"
+                            style={{
+                              objectPosition: "center",
+                              aspectRatio: "1/1",
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

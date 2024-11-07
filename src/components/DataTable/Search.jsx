@@ -23,7 +23,7 @@ const CoinListItem = ({ result }) => {
           <img 
             src={result.large} 
             alt={result.name}
-            className="w-full h-full object-contain"
+            className="w-full h-full rounded-full object-cover scale-[1.15]"
           />
         </div>
         <div className="flex-1 min-w-0">

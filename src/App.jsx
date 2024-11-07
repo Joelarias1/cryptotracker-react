@@ -5,6 +5,8 @@ import Header from "./components/Header/Header";
 import { NavbarSimple } from "./components/Navbar/Navbar";
 import { BrandsSection } from "./components/Social/BrandsSection";
 
+
+
 function App() {
   return (
     <div className="min-h-screen bg-neutral-900 relative">
@@ -13,6 +15,8 @@ function App() {
         {/* Orbes principales */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+
         
         {/* Orbes secundarios para más profundidad */}
         <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
