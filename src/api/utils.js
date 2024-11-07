@@ -8,8 +8,8 @@ export const formatPercentage = (percentage) => {
   export const percentageValue = (value) => {
     const numericValue = parseFloat(value);
     return numericValue > 0
-      ? { color: "green" }
+      ? { color: "rgb(134 239 172)" }
       : numericValue < 0
-      ? { color: "red" }
+      ? { color: "rgb(244 63 94)" }
       : {};
   };

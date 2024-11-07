@@ -280,3 +280,4 @@ export const getCoinHistoricalData = async (coinId, days = '7', vs_currency = 'u
     }
   }, cacheDuration);
 };
+

@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import { Card, Typography, CardBody, Avatar, Spinner } from "@material-tailwind/react";
-import { getCoinsList } from "../../api/main-api";
 import { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { MdOutlineManageSearch } from "react-icons/md";
 import { CoinInformation } from "./CoinData";
 import { percentageValue } from "../../api/utils";
 import { SearchComponent } from "./Search";
+import { getCoinsList } from "../../api/main-api";
 
 const TABLE_HEAD = [
   { label: "#", key: "rank" },
@@ -28,9 +26,9 @@ const CoinDetailsButton = ({ coinId }) => {
     <>
       <button
         onClick={handleOpen}
-        className="p-2 rounded-lg hover:bg-gray-100 transition-colors group"
+        className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 ease-in-out group"
       >
-        <MdOutlineManageSearch className="text-2xl text-gray-600 group-hover:text-gray-800" />
+        <MdOutlineManageSearch className="text-2xl text-neutral-300 group-hover:text-white transform group-hover:scale-110 transition-all duration-300" />
       </button>
       <CoinInformation
         isOpen={dialogOpen}
@@ -65,148 +63,149 @@ export const Table = ({ name }) => {
     fetchData();
   }, []);
 
-  const motionVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { ease: "easeIn", duration: 0.6 } },
-  };
-  const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.15,
   });
 
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [inView, controls]);
-
   return (
-    <section id={name} className="py-10 lg:py-20 bg-zinc-50">
-      <motion.div
-        initial="hidden"
-        animate={controls}
-        variants={motionVariants}
+    <section id={name} className="py-10 lg:py-20 overflow-hidden">
+      {/* Gradient background elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div
         ref={ref}
+        className={`relative z-10 transition-opacity duration-700 ${
+          inView ? "opacity-100" : "opacity-0"
+        }`}
       >
-        <div className="flex flex-col items-center justify-center px-4 mb-8">
-          <h1 className="text-3xl font-black text-gray-800 md:text-5xl">
-            Cryptocurrency Prices
-          </h1>
-          <p className="mt-3 text-base md:text-lg text-gray-600">
+        <div className="flex flex-col items-center justify-center px-4 mb-12">
+          <div className="relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-lg blur-lg"></div>
+            <h1 className="relative text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400/90 via-purple-400/90 to-blue-400/90 md:text-5xl">
+              Cryptocurrency Prices
+            </h1>
+          </div>
+          <p className="mt-4 text-base md:text-lg text-neutral-300/80 max-w-2xl text-center">
             Real-time prices of top cryptocurrencies
           </p>
         </div>
 
         <SearchComponent />
 
-        <div className="px-4 lg:px-8 mt-6">
+        <div className="px-4 lg:px-8 mt-8">
           {loading ? (
-            <Card className="w-full overflow-hidden">
-              <div className="flex items-center justify-center h-full gap-4 py-64">
-                <Typography variant="h3" color="blue-gray" className="font-bold">
-                  Loading...
-                </Typography>
-                <Spinner color="blue" size="4xl" />
+            <div className="backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+              <div className="flex items-center justify-center h-96 gap-4">
+                <div className="text-xl font-semibold text-white">Loading</div>
+                <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
               </div>
-            </Card>
+            </div>
           ) : (
-            <Card className="w-full overflow-hidden bg-white shadow-lg">
-              <CardBody className="p-0">
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-max table-auto">
-                    <thead>
-                      <tr className="border-b border-gray-100 bg-gray-50/50">
-                        {TABLE_HEAD.map((head) => (
-                          <th key={head.key} className="p-4">
-                            <Typography
-                              variant="small"
-                              className="text-sm font-semibold text-gray-600 text-left"
-                            >
-                              {head.label}
-                            </Typography>
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {coinsData.map((coin) => (
-                        <tr
-                          key={coin.name}
-                          className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
+            <div className="backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-max table-auto">
+                  <thead>
+                    <tr className="border-b border-white/10 bg-white/5">
+                      {TABLE_HEAD.map((head) => (
+                        <th
+                          key={head.key}
+                          className="p-4 transition-colors duration-200"
                         >
-                          <td className="p-4">
-                            <Typography className="text-sm font-medium text-gray-500">
-                              {coin.rank}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <div className="flex items-center gap-3">
-                              <Avatar
+                          <span className="text-sm font-semibold text-neutral-300 text-left">
+                            {head.label}
+                          </span>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {coinsData.map((coin) => (
+                      <tr
+                        key={coin.name}
+                        className="border-b border-white/5 hover:bg-white/5 transition-colors duration-200"
+                      >
+                        <td className="p-4">
+                          <span className="text-sm font-medium text-neutral-400">
+                            {coin.rank}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-white/10 p-1.5 backdrop-blur-sm border border-white/10">
+                              <img
                                 src={coin.image}
                                 alt={coin.name}
-                                size="sm"
-                                className="rounded-full bg-white border border-gray-100 p-0.5 shadow-sm"
+                                className="w-full h-full object-contain"
                               />
-                              <div className="flex flex-col">
-                                <Typography className="text-sm font-semibold text-gray-800">
-                                  {coin.name}
-                                </Typography>
-                                <Typography className="text-xs font-medium text-gray-500 uppercase">
-                                  {coin.symbol}
-                                </Typography>
-                              </div>
                             </div>
-                          </td>
-                          <td className="p-4">
-                            <Typography className="text-sm font-semibold text-gray-800">
-                              {coin.currentPrice}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <Typography
-                              style={percentageValue(coin.priceChangePercentage1h)}
-                              className="text-sm font-medium"
-                            >
-                              {coin.priceChangePercentage1h}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <Typography
-                              style={percentageValue(coin.priceChangePercentage24h)}
-                              className="text-sm font-medium"
-                            >
-                              {coin.priceChangePercentage24h}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <Typography
-                              style={percentageValue(coin.priceChangePercentage7d)}
-                              className="text-sm font-medium"
-                            >
-                              {coin.priceChangePercentage7d}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <Typography className="text-sm font-medium text-gray-800">
-                              {coin.marketcap}
-                            </Typography>
-                          </td>
-                          <td className="p-4">
-                            <div className="flex justify-end">
-                              <CoinDetailsButton coinId={coin.id} />
+                            <div className="flex flex-col">
+                              <span className="text-sm font-semibold text-slate-50">
+                                {coin.name}
+                              </span>
+                              <span className="text-xs font-medium text-neutral-400 uppercase">
+                                {coin.symbol}
+                              </span>
                             </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardBody>
-            </Card>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <span className="text-sm font-semibold text-slate-50">
+                            {coin.currentPrice}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span
+                            style={percentageValue(
+                              coin.priceChangePercentage1h
+                            )}
+                            className="text-sm font-medium px-2 py-1 rounded-lg backdrop-blur-sm bg-opacity-20"
+                          >
+                            {coin.priceChangePercentage1h}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span
+                            style={percentageValue(
+                              coin.priceChangePercentage24h
+                            )}
+                            className="text-sm font-medium px-2 py-1 rounded-lg backdrop-blur-sm bg-opacity-20"
+                          >
+                            {coin.priceChangePercentage24h}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span
+                            style={percentageValue(
+                              coin.priceChangePercentage7d
+                            )}
+                            className="text-sm font-medium px-2 py-1 rounded-lg backdrop-blur-sm bg-opacity-20"
+                          >
+                            {coin.priceChangePercentage7d}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span className="text-sm font-medium text-white">
+                            {coin.marketcap}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex justify-end">
+                            <CoinDetailsButton coinId={coin.id} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           )}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

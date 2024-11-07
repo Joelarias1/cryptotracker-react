@@ -135,10 +135,10 @@ export const BrandsSection = ({ name }) => {
   return (
     <section
       id={name}
-      className="relative py-12 bg-gradient-to-b from-zinc-800 to-zinc-900 overflow-hidden min-h-screen flex flex-col"
+      className="relative py-12 overflow-hidden min-h-screen flex flex-col mt-24"
     >
 
-      <div className="relative container mx-auto px-4 md:px-8 lg:px-16 flex-shrink-0 z-10 content-center my-12">
+      <div className="relative container mx-auto px-4 md:px-8 lg:px-16 flex-shrink-0 z-10 content-center my-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
