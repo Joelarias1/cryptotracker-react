@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
+import "./brands.css";
 
 export const BrandsSection = ({ name }) => {
   const logos = [
@@ -46,11 +47,17 @@ export const BrandsSection = ({ name }) => {
   const LogoCard = ({ logo }) => {
     const [isHovered, setIsHovered] = useState(false);
 
+    const handleInteraction = () => {
+      setIsHovered((prev) => !prev);
+    };
+
     return (
       <motion.div
         className="flex-shrink-0 group relative"
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
+        onHoverStart={handleInteraction}
+        onHoverEnd={handleInteraction}
+        onTouchStart={handleInteraction}
+        onTouchEnd={handleInteraction}
         whileHover={{
           scale: 1.1,
           y: -5,
@@ -90,45 +97,36 @@ export const BrandsSection = ({ name }) => {
   };
 
   const InfiniteCarousel = () => {
-    const controls = useAnimationControls();
-    const containerRef = useRef(null);
-
-    const startAnimation = useCallback(async () => {
-      if (!containerRef.current) return;
-
-      await controls.start({
-        x: "-50%",
-        transition: {
-          duration: 20,
-          ease: "linear",
-        },
-      });
-
-      controls.set({ x: "0%" });
-      startAnimation();
-    }, [controls]);
-
-    useEffect(() => {
-      startAnimation();
-
-      return () => {
-        controls.stop();
-      };
-    }, [startAnimation, controls]);
-
+    const [isPaused, setIsPaused] = useState(false);
+  
+    const duplicatedLogos = [...logos, ...logos, ...logos];
+  
     return (
-      <div
-        className="overflow-hidden relative w-full mx-auto"
-        ref={containerRef}
+      <div 
+        className="overflow-hidden relative w-full"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        <motion.div
-          className="flex gap-24 py-6
-          "
-          animate={controls}
-          initial={{ x: "0%" }}
+        <motion.div 
+          className="flex gap-24 py-6 w-fit"
+          animate={{
+            x: "-33.333%"
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
+              pause: isPaused
+            },
+          }}
+          style={{
+            animationPlayState: isPaused ? "paused" : "running"
+          }}
         >
-          {[...logos, ...logos].map((logo, idx) => (
-            <LogoCard key={`${logo.alt}-${idx}`} logo={logo} />
+          {duplicatedLogos.map((logo, index) => (
+            <LogoCard key={`${logo.alt}-${index}`} logo={logo} />
           ))}
         </motion.div>
       </div>
@@ -138,16 +136,8 @@ export const BrandsSection = ({ name }) => {
   return (
     <section
       id={name}
-      className="relative py-12 bg-gradient-to-b from-zinc-900 to-zinc-800 overflow-hidden min-h-screen flex flex-col"
+      className="relative py-12 bg-gradient-to-b from-zinc-800 to-zinc-900 overflow-hidden min-h-screen flex flex-col"
     >
-      <div className="absolute inset-0">
-        <div className="absolute -top-4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-zinc-900 via-zinc-900/80 to-transparent z-10"></div>
-        <div
-          className="absolute -bottom-4 right-1/4 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
-      </div>
 
       <div className="relative container mx-auto px-4 md:px-8 lg:px-16 flex-shrink-0 z-10 content-center my-12">
         <motion.div
@@ -182,6 +172,7 @@ export const BrandsSection = ({ name }) => {
           <div className="h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
           <div className="h-[1px] mt-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"></div>
         </div>
+
         <InfiniteCarousel />
       </div>
     </section>
