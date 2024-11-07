@@ -2,7 +2,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
-import "./brands.css";
 
 export const BrandsSection = ({ name }) => {
   const logos = [
