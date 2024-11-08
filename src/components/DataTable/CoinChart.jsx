@@ -48,6 +48,11 @@ export function CoinChart({ coinId, timeframe }) {
             const lineColor =
               priceChange >= 0 ? "rgb(22, 199, 132)" : "rgb(234, 57, 67)";
 
+            const formattedData = result.prices.map((price, index) => ({
+              x: result.labels[index],
+              y: price
+            }));
+
             const createGradient = (ctx) => {
               const gradient = ctx.createLinearGradient(
                 0,
@@ -72,7 +77,7 @@ export function CoinChart({ coinId, timeframe }) {
               datasets: [
                 {
                   label: "Price",
-                  data: result.prices,
+                  data: formattedData,
                   fill: true,
                   borderColor: lineColor,
                   backgroundColor: (context) => {
@@ -82,6 +87,7 @@ export function CoinChart({ coinId, timeframe }) {
                   tension: 0.4,
                   borderWidth: 1.5,
                   pointRadius: 0,
+                  pointHitRadius: 10,
                   pointHoverRadius: 6,
                   pointHoverBackgroundColor: lineColor,
                   pointHoverBorderColor: "#fff",
@@ -94,6 +100,10 @@ export function CoinChart({ coinId, timeframe }) {
                       return "rgb(22, 199, 132)";
                     },
                   },
+                  parsing: {
+                    xAxisKey: 'x',
+                    yAxisKey: 'y'
+                  }
                 },
               ],
             });
@@ -109,14 +119,16 @@ export function CoinChart({ coinId, timeframe }) {
       isInitialMount.current = false;
       previousTimeframe.current = timeframe;
     }
-  }, [coinId, timeframe]);
+  }, [coinId, timeframe, chartData]);
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     interaction: {
-      mode: "index",
+      mode: "nearest",
+      axis: "x",
       intersect: false,
+      includeInvisible: true,
     },
     animations: {
       tension: {
@@ -129,14 +141,20 @@ export function CoinChart({ coinId, timeframe }) {
       },
     },
     plugins: {
+      decimation: {
+        enabled: false,
+      },
       legend: {
         display: false,
       },
       tooltip: {
         enabled: true,
-        backgroundColor: "rgba(17, 17, 17, 0.95)", // Fondo oscuro
-        titleColor: "#ffffff", // Texto blanco
-        bodyColor: "#ffffff", // Texto blanco
+        backgroundColor: "rgba(17, 17, 17, 0.95)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
+        intersect: false,
+        mode: "nearest",
+        axis: "x",
         titleFont: {
           size: 12,
           weight: "500",
@@ -151,25 +169,16 @@ export function CoinChart({ coinId, timeframe }) {
           x: 12,
           y: 8,
         },
-        borderColor: "rgba(255, 255, 255, 0.1)", // Borde blanco transparente
+        borderColor: "rgba(255, 255, 255, 0.1)",
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
         callbacks: {
-          title: (tooltipItems) => {
-            const date = new Date(tooltipItems[0].label);
-            return date.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-          },
           label: (context) => {
-            const currentValue = formatPrice(context.raw);
-            const firstValue = context.dataset.data[0];
+            const currentValue = formatPrice(context.raw.y);
+            const firstValue = context.dataset.data[0].y;
             const percentageChange =
-              ((context.raw - firstValue) / firstValue) * 100;
+              ((context.raw.y - firstValue) / firstValue) * 100;
 
             return [
               `${currentValue}`,
@@ -188,11 +197,16 @@ export function CoinChart({ coinId, timeframe }) {
           display: false,
           drawBorder: false,
         },
+        ticks: {
+          display: false,
+        },
+        distribution: 'linear',
+        offset: false,
       },
       y: {
         position: "right",
         grid: {
-          color: "rgba(255, 255, 255, 0.05)", // Líneas de grid más sutiles
+          color: "rgba(255, 255, 255, 0.05)",
           drawBorder: false,
         },
         border: {
@@ -204,11 +218,10 @@ export function CoinChart({ coinId, timeframe }) {
             weight: "500",
             family: "'Inter', sans-serif",
           },
-          color: "rgba(255, 255, 255, 0.7)", // Texto de los valores en blanco transparente
+          color: "rgba(255, 255, 255, 0.7)",
           callback: (value) => formatPrice(value),
           padding: 12,
           count: 5,
-          maxTicksLimit: 5,
           align: "center",
         },
       },
@@ -250,3 +263,5 @@ CoinChart.propTypes = {
   coinId: PropTypes.string.isRequired,
   timeframe: PropTypes.string.isRequired,
 };
+
+export default CoinChart;

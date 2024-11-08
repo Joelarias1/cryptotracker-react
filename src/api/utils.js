@@ -11,5 +11,6 @@ export const formatPercentage = (percentage) => {
       ? { color: "rgb(134 239 172)" }
       : numericValue < 0
       ? { color: "rgb(244 63 94)" }
-      : {};
+      : {color: "white"};
   };
+  

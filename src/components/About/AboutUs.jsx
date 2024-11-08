@@ -84,7 +84,7 @@ export const AboutUs = ({ name }) => {
           {loading ? (
             <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin self-start mt-4"/>
           ) : (
-            <p className="text-3xl font-bold text-white tracking-tight mt-4">
+            <p className="text-3xl font-bold text-slate-100 tracking-tight mt-4">
               {value || 0}
             </p>
           )}
@@ -116,7 +116,7 @@ export const AboutUs = ({ name }) => {
                 <span className="text-sm font-bold text-blue-400 uppercase">
                   Who we are?
                 </span>
-                <h1 className="mt-2 text-3xl font-black text-white md:text-5xl">
+                <h1 className="mt-2 text-3xl font-black text-slate-200 md:text-5xl">
                   About Us
                 </h1>
               </div>

@@ -103,19 +103,19 @@ export const BrandsSection = ({ name }) => {
 
   const InfiniteCarousel = () => {
     const [isPaused, setIsPaused] = useState(false);
-  
+
     const duplicatedLogos = [...logos, ...logos, ...logos];
-  
+
     return (
-      <div 
+      <div
         className="overflow-hidden relative w-full"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <motion.div 
+        <motion.div
           className="flex gap-24 py-6 w-fit"
           animate={{
-            x: "-33.333%"
+            x: "-33.333%",
           }}
           transition={{
             x: {
@@ -123,11 +123,11 @@ export const BrandsSection = ({ name }) => {
               repeatType: "loop",
               duration: 30,
               ease: "linear",
-              pause: isPaused
+              pause: isPaused,
             },
           }}
           style={{
-            animationPlayState: isPaused ? "paused" : "running"
+            animationPlayState: isPaused ? "paused" : "running",
           }}
         >
           {duplicatedLogos.map((logo, index) => (
@@ -143,7 +143,6 @@ export const BrandsSection = ({ name }) => {
       id={name}
       className="relative py-12 overflow-hidden min-h-screen flex flex-col mt-24"
     >
-
       <div className="relative container mx-auto px-4 md:px-8 lg:px-16 flex-shrink-0 z-10 content-center my-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -151,20 +150,21 @@ export const BrandsSection = ({ name }) => {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">Powered by </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600">
+          <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl"></div>
+            <span className="relative text-slate-100">Powered by </span>
+            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
               Modern Technologies
             </span>
           </h2>
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             Built with the latest tools and frameworks for
-            <span className="font-semibold text-blue-400">
+            <a className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
               {" "}
               optimal performance{" "}
-            </span>
+            </a>
             and an
-            <span className="font-semibold text-blue-400">
+            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
               {" "}
               exceptional user experience
             </span>
