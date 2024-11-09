@@ -19,19 +19,9 @@ It is mainly a Single Page Application where it will show the prices of differen
 -  Web3 Integration ❔
 
 
-## Screenshots 🎞
-
-[![1.png](https://i.postimg.cc/wBBFRC6R/1.png)](https://postimg.cc/LJrjr0gm)
-
-[![2.png](https://i.postimg.cc/C5ykN8Ry/2.png)](https://postimg.cc/7GV5Pf1X)
-
-[![3.png](https://i.postimg.cc/44tz3W0X/3.png)](https://postimg.cc/yW1JQyBG)
-
-[![4.png](https://i.postimg.cc/m2yCYtRq/4.png)](https://postimg.cc/CzdRYMRH)
-
 ## Tech Stack 🛠
 
-**Client:** React, TailwindCSS, Material-Tailwind, Framer Motion, Lottie, React-Scroll, React-intersection-observer
+**Client:** React, TailwindCSS, Material-Tailwind, Framer Motion, Lottie, React-Scroll, React-intersection-observer, ChartJS
 
 **Server:** Node.js
 
