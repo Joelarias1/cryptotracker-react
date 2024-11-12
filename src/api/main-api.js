@@ -127,7 +127,7 @@ export const getCoinInfo = async (coinId) => {
         ath: formatPrice(data.market_data.ath.usd),
         athChange: formatPercentage(data.market_data.ath_change_percentage.usd),
         price24h: formatPercentage(data.market_data.price_change_percentage_24h),
-        totalSupply: data.market_data.circulating_supply.toLocaleString("en-US"),
+        totalSupply: data.market_data.circulating_supply.toLocaleString("en-US") || "Desconocido",
         maxSupply,
         userWatchlist: data.watchlist_portfolio_users.toLocaleString("en-US"),
         linkHome: data.links.homepage[0] || " ",

@@ -118,10 +118,17 @@ export const AboutUs = () => {
             initial={{ opacity: 0 }}
             animate={{
               opacity: isHovered ? 1 : 0,
-              background:
-                "linear-gradient(45deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1))",
+              background: [
+                "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%)",
+                "radial-gradient(circle at 100% 100%, #a855f7 0%, transparent 50%)",
+                "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%)",
+              ],
             }}
-            transition={{ duration: 0.3 }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
           />
 
           <div className="relative z-10 h-full flex flex-col justify-between">
@@ -177,25 +184,6 @@ export const AboutUs = () => {
 
   return (
     <section id="about-us" className="py-10 lg:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Gradiente base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
-
-        {/* Luces de fondo mejoradas */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-pulse" />
-
-        {/* Sparks adicionales */}
-        <div
-          className="absolute top-1/3 right-1/3 w-48 h-48 bg-blue-400/30 rounded-full blur-[50px] animate-ping"
-          style={{ animationDuration: "3s" }}
-        />
-        <div
-          className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-purple-400/30 rounded-full blur-[50px] animate-ping"
-          style={{ animationDuration: "4s" }}
-        />
-      </div>
-
       <motion.div
         className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6 relative z-10"
         initial="hidden"
@@ -223,7 +211,20 @@ export const AboutUs = () => {
                 up-to-date crypto prices. Credits to CoinGecko for provide the
                 API.
               </p>
-              <div className="flex flex-wrap items-center">
+              <div className="flex flex-wrap items-center relative">
+                {/* Spark más arriba de las tarjetas */}
+                <motion.div
+                  className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-[200px] h-[200px] bg-blue-500/60 rounded-full blur-[60px] z-0"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.6, 0.8, 0.6],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
                 <StatCard
                   title="Crypto Currencies"
                   value={marketData.activeCrypto}
@@ -249,18 +250,6 @@ export const AboutUs = () => {
                 ease: "easeInOut",
               }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.5, 0.7, 0.5],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
               <motion.div
                 className="relative aspect-square sm:aspect-video md:aspect-[4/3] lg:aspect-square backdrop-blur-sm bg-white/5 rounded-3xl p-6 border border-white/10"
                 whileHover={{

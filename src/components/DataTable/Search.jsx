@@ -17,7 +17,7 @@ const CoinListItem = ({ result }) => {
     <>
       <li 
         onClick={handleClick}
-        className="cursor-pointer hover:bg-white/5 p-2 flex items-center transition-colors duration-200 border-b border-white/5 last:border-0"
+        className="cursor-pointer hover:bg-white/10 p-2 flex items-center transition-colors duration-200 border-b border-white/5 last:border-0"
       >
         <div className="w-8 h-8 rounded-full bg-white/10 p-1 backdrop-blur-sm border border-white/10 mr-3 overflow-hidden">
           <img 
@@ -89,7 +89,7 @@ export const SearchComponent = () => {
           <Input
             type="text"
             placeholder="Search..."
-            className="!border !border-white/10 bg-white/5 backdrop-blur-md text-white shadow-lg placeholder:text-neutral-400 focus:!border-white/20 w-full !ring-0 pl-10" // Añadido pl-10 para dejar espacio al ícono
+            className={`!border !border-white/10 bg-white/5 backdrop-blur-md text-white shadow-lg placeholder:text-neutral-400 focus:!border-white/20 w-full !ring-0 pl-10`}
             labelProps={{
               className: "hidden",
             }}
@@ -104,7 +104,7 @@ export const SearchComponent = () => {
 
         {/* Results dropdown */}
         {showResults && (
-          <div className="absolute mt-2 backdrop-blur-md bg-neutral-800/50 border border-white/10 shadow-2xl w-full max-h-[300px] overflow-y-auto z-50 rounded-xl">
+          <div className="absolute mt-2 backdrop-blur-sm bg-neutral-800/70 border border-white/10 shadow-2xl w-full max-h-[300px] overflow-y-auto z-50 rounded-xl custom-scrollbar">
             {isLoading ? (
               <div className="p-4 text-center text-neutral-400">
                 <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>

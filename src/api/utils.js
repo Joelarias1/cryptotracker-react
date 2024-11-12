@@ -1,8 +1,10 @@
-
 // Format Percentages
 export const formatPercentage = (percentage) => {
-    return `${parseFloat(percentage).toFixed(2)} %`;
-  };
+    const num = parseFloat(percentage);
+    return num > 0 
+      ? `+${num.toFixed(2)} %` 
+      : `${num.toFixed(2)} %`;
+};
   
 
   export const percentageValue = (value) => {

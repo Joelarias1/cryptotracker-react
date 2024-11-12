@@ -6,8 +6,14 @@ import 'swiper/css';
 import './BrandsSection.css';
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
 import { useState } from 'react';
+import { useInView } from "react-intersection-observer";
 
 export const BrandsSection = ({ name }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.15,
+  });
+
   const logos = [
     {
       src: "https://www.cdnlogo.com/logos/r/63/react.svg",
@@ -57,16 +63,16 @@ export const BrandsSection = ({ name }) => {
     <section
       id={name}
       className="relative py-12 overflow-hidden min-h-screen flex flex-col mt-24"
+      ref={ref}
     >
       <div className="relative container mx-auto px-4 md:px-8 lg:px-16 flex-shrink-0 z-10 content-center my-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
           <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl"></div>
             <span className="relative text-slate-100">Powered by </span>
             <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
               Modern Technologies
@@ -114,12 +120,20 @@ export const BrandsSection = ({ name }) => {
 
 const LogoCard = ({ logo }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
     <motion.div
+      ref={ref}
       className="flex-shrink-0 group relative mx-8"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       whileHover={{
         scale: 1.1,
         y: -5,

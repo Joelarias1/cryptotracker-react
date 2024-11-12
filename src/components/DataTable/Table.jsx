@@ -98,49 +98,12 @@ export const Table = ({ name }) => {
   return (
     <motion.section 
       id={name} 
-      className="py-10 lg:py-20 overflow-hidden"
+      className="py-10 lg:py-20 overflow-hidden relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Gradient background elements */}
-      <motion.div 
-        className="absolute top-0 left-0 w-full h-full overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
-      </motion.div>
-
-      <div
-        ref={ref}
-        className="relative z-10"
-      >
+      <div ref={ref} className="relative z-10">
         <motion.div 
           className="flex flex-col items-center justify-center px-4 mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -190,7 +153,7 @@ export const Table = ({ name }) => {
                 key="table"
                 variants={tableVariants}
                 initial="hidden"
-                animate="visible"
+                animate={inView ? "visible" : "hidden"}
                 className="backdrop-blur-md bg-white/5 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10"
               >
                 <div className="overflow-x-auto">
