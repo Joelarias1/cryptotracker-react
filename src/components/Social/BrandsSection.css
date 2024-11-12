@@ -1,0 +1,34 @@
+.brands-swiper {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.brands-swiper .swiper-slide {
+  width: auto;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.brands-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+  will-change: transform;
+}
+
+/* Gradientes en los bordes para suavizar la transición */
+.brands-swiper:before,
+.brands-swiper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  z-index: 2;
+}
+
+.brands-swiper:before {
+  left: 0;
+}
+
+.brands-swiper:after {
+  right: 0;
+}

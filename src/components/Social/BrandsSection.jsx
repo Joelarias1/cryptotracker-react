@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import './BrandsSection.css';
 import coingeckoLogo from "../../assets/coingecko-logo.svg";
+import { useState } from 'react';
 
 export const BrandsSection = ({ name }) => {
   const logos = [
@@ -49,95 +53,6 @@ export const BrandsSection = ({ name }) => {
     },
   ];
 
-  const LogoCard = ({ logo }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleInteraction = () => {
-      setIsHovered((prev) => !prev);
-    };
-
-    return (
-      <motion.div
-        className="flex-shrink-0 group relative"
-        onHoverStart={handleInteraction}
-        onHoverEnd={handleInteraction}
-        onTouchStart={handleInteraction}
-        onTouchEnd={handleInteraction}
-        whileHover={{
-          scale: 1.1,
-          y: -5,
-          transition: { duration: 0.3, ease: "easeOut" },
-        }}
-      >
-        <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 transition-all duration-300 group-hover:bg-white/10">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <img
-            src={logo.src}
-            alt={logo.alt}
-            className={`${logo.width} h-28 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300`}
-          />
-        </div>
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 5, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-max z-20"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gray-900/80 rounded-full blur-sm"></div>
-                <div className="relative bg-gray-900/95 px-4 py-2 rounded-full border border-white/10">
-                  <p className="text-white/90 text-sm font-medium whitespace-nowrap">
-                    {logo.title}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    );
-  };
-
-  const InfiniteCarousel = () => {
-    const [isPaused, setIsPaused] = useState(false);
-
-    const duplicatedLogos = [...logos, ...logos, ...logos];
-
-    return (
-      <div
-        className="overflow-hidden relative w-full"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <motion.div
-          className="flex gap-24 py-6 w-fit"
-          animate={{
-            x: "-33.333%",
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 30,
-              ease: "linear",
-              pause: isPaused,
-            },
-          }}
-          style={{
-            animationPlayState: isPaused ? "paused" : "running",
-          }}
-        >
-          {duplicatedLogos.map((logo, index) => (
-            <LogoCard key={`${logo.alt}-${index}`} logo={logo} />
-          ))}
-        </motion.div>
-      </div>
-    );
-  };
-
   return (
     <section
       id={name}
@@ -173,13 +88,73 @@ export const BrandsSection = ({ name }) => {
       </div>
 
       <div className="relative w-full flex-grow flex items-center overflow-hidden">
-        <div className="absolute bottom-16 inset-x-0">
-          <div className="h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
-          <div className="h-[1px] mt-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"></div>
-        </div>
-
-        <InfiniteCarousel />
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView="auto"
+          loop={true}
+          speed={8000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          className="brands-swiper"
+          allowTouchMove={false}
+        >
+          {[...logos, ...logos].map((logo, index) => (
+            <SwiperSlide key={`${logo.alt}-${index}`} className="w-auto">
+              <LogoCard logo={logo} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
+  );
+};
+
+const LogoCard = ({ logo }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      className="flex-shrink-0 group relative mx-8"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{
+        scale: 1.1,
+        y: -5,
+        transition: { duration: 0.3, ease: "easeOut" },
+      }}
+    >
+      <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 transition-all duration-300 group-hover:bg-white/10">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          className={`${logo.width} h-28 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300`}
+        />
+      </div>
+      
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-max z-20"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gray-900/80 rounded-full blur-sm"></div>
+              <div className="relative bg-gray-900/95 px-4 py-2 rounded-full border border-white/10">
+                <p className="text-white/90 text-sm font-medium whitespace-nowrap">
+                  {logo.title}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };

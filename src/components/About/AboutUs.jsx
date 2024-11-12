@@ -2,11 +2,11 @@
 import { motion, useAnimation } from "framer-motion";
 import Lottie from "lottie-react";
 import animation from "./blocks-animation.json";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getGlobalData } from "../../api/main-api";
 
-export const AboutUs = ({ name }) => {
+export const AboutUs = () => {
   const [marketData, setMarketData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,28 +29,15 @@ export const AboutUs = ({ name }) => {
 
   const sectionAnimation = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        ease: "easeOut", 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: "easeOut",
         duration: 0.8,
-        staggerChildren: 0.2
-      } 
+        staggerChildren: 0.2,
+      },
     },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-    hover: { 
-      scale: 1.05,
-      transition: { 
-        type: "spring",
-        stiffness: 300,
-        damping: 10
-      }
-    }
   };
 
   const controls = useAnimation();
@@ -65,41 +52,148 @@ export const AboutUs = ({ name }) => {
     }
   }, [inView, controls]);
 
-  const StatCard = ({ title, value }) => (
-    <motion.div
-      variants={cardVariants}
-      whileHover="hover"
-      className="relative w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6"
-    >
-      <div className="h-[140px] p-6 rounded-2xl overflow-hidden relative backdrop-blur-md border border-white/10 bg-gradient-to-br from-white/10 to-white/5 flex flex-col justify-between">
-        {/* Gradient orb background */}
-        <div className="absolute -top-8 -left-8 w-24 h-24 bg-blue-500/30 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-purple-500/30 rounded-full blur-2xl"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-between">
-          <h2 className="text-sm text-neutral-300 font-medium uppercase tracking-wider">
-            {title}
-          </h2>
-          {loading ? (
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin self-start mt-4"/>
-          ) : (
-            <p className="text-3xl font-bold text-slate-100 tracking-tight mt-4">
-              {value || 0}
-            </p>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-  
+  const StatCard = ({ title, value }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const cardRef = useRef(null);
+
+    const handleMouseMove = (event) => {
+      if (!cardRef.current || !isHovered) return;
+
+      const card = cardRef.current;
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`; // Aumentado scale
+    };
+
+    const handleMouseLeave = () => {
+      if (!cardRef.current) return;
+      cardRef.current.style.transform = "none";
+      setIsHovered(false);
+    };
+
+    return (
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        className="relative w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6"
+        style={{ transition: "transform 0.2s ease-out" }}
+      >
+        <motion.div
+          className="h-[140px] p-6 rounded-2xl overflow-hidden relative backdrop-blur-md border border-white/10 bg-gradient-to-br from-white/10 to-white/5 flex flex-col justify-between"
+          whileHover={{
+            boxShadow: "0 0 20px 0 rgba(59, 130, 246, 0.1)",
+          }}
+        >
+          {/* Efectos de fondo animados */}
+          <motion.div
+            className="absolute -top-8 -left-8 w-24 h-24 bg-blue-500/30 rounded-full blur-2xl"
+            animate={{
+              scale: isHovered ? 1.2 : 1,
+              opacity: isHovered ? 0.4 : 0.3,
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div
+            className="absolute -bottom-8 -right-8 w-24 h-24 bg-purple-500/30 rounded-full blur-2xl"
+            animate={{
+              scale: isHovered ? 1.2 : 1,
+              opacity: isHovered ? 0.4 : 0.3,
+            }}
+            transition={{ duration: 0.3 }}
+          />
+
+          {/* Borde brillante en hover */}
+          <motion.div
+            className="absolute inset-0 rounded-2xl"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: isHovered ? 1 : 0,
+              background:
+                "linear-gradient(45deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1))",
+            }}
+            transition={{ duration: 0.3 }}
+          />
+
+          <div className="relative z-10 h-full flex flex-col justify-between">
+            <motion.h2
+              className="text-sm text-neutral-300 font-medium uppercase tracking-wider"
+              animate={{
+                color: isHovered ? "#93c5fd" : "#d4d4d4",
+              }}
+              transition={{ duration: 0.2 }}
+            >
+              {title}
+            </motion.h2>
+            {loading ? (
+              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin self-start mt-4" />
+            ) : (
+              <motion.p
+                className="text-3xl font-bold text-slate-100 tracking-tight mt-4"
+                animate={{
+                  scale: isHovered ? 1.05 : 1,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }}
+              >
+                {value || 0}
+              </motion.p>
+            )}
+          </div>
+
+          {/* Efecto de brillo en movimiento */}
+          <motion.div
+            className="absolute inset-0 opacity-0"
+            animate={{
+              opacity: isHovered ? 0.1 : 0,
+              background: [
+                "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%)",
+                "radial-gradient(circle at 100% 100%, #a855f7 0%, transparent 50%)",
+                "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%)",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </motion.div>
+      </motion.div>
+    );
+  };
 
   return (
-    <section id={name} className="py-10 lg:py-20 relative overflow-hidden">
-      {/* Gradient background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <section id="about-us" className="py-10 lg:py-20 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Gradiente base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
+
+        {/* Luces de fondo mejoradas */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-pulse" />
+
+        {/* Sparks adicionales */}
+        <div
+          className="absolute top-1/3 right-1/3 w-48 h-48 bg-blue-400/30 rounded-full blur-[50px] animate-ping"
+          style={{ animationDuration: "3s" }}
+        />
+        <div
+          className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-purple-400/30 rounded-full blur-[50px] animate-ping"
+          style={{ animationDuration: "4s" }}
+        />
       </div>
 
       <motion.div
@@ -130,24 +224,72 @@ export const AboutUs = ({ name }) => {
                 API.
               </p>
               <div className="flex flex-wrap items-center">
-                <StatCard title="Crypto Currencies" value={marketData.activeCrypto} />
+                <StatCard
+                  title="Crypto Currencies"
+                  value={marketData.activeCrypto}
+                />
                 <StatCard title="Markets" value={marketData.markets} />
-                <StatCard title="Total Exchanges" value={marketData.totalExchanges} />
+                <StatCard
+                  title="Total Exchanges"
+                  value={marketData.totalExchanges}
+                />
                 <StatCard title="Ongoing ICO" value={marketData.icos} />
               </div>
             </div>
           </div>
           <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-            <div className="relative">
-              {/* Animation background effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"></div>
-              <div className="relative aspect-square sm:aspect-video md:aspect-[4/3] lg:aspect-square backdrop-blur-sm bg-white/5 rounded-3xl p-6 border border-white/10">
+            <motion.div
+              className="relative"
+              animate={{
+                y: [-10, 10, -10], 
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.5, 0.7, 0.5],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="relative aspect-square sm:aspect-video md:aspect-[4/3] lg:aspect-square backdrop-blur-sm bg-white/5 rounded-3xl p-6 border border-white/10"
+                whileHover={{
+                  scale: 1.02,
+                  transition: { duration: 0.3 },
+                }}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-3xl"
+                  animate={{
+                    background: [
+                      "linear-gradient(45deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1))",
+                      "linear-gradient(225deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1))",
+                      "linear-gradient(45deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1))",
+                    ],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
                 <Lottie
                   animationData={animation}
                   className="w-full h-full"
+                  loop={true}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </motion.div>

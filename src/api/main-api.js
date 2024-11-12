@@ -1,72 +1,10 @@
 // services/api.js
 
+import { handleApiError, handleApiResponse } from "./api-handler";
+import { API_CONFIG, CACHE_DURATIONS, createUrl, fetchWithCache } from "./api-utils";
 import { formatPercentage } from "./utils";
 
-// Configuración central de la API
-const API_CONFIG = {
-  BASE_URL: "https://api.coingecko.com/api/v3",
-  DEFAULT_PARAMS: {
-    x_cg_demo_api_key: import.meta.env.VITE_API_KEY,
-  },
-  DEFAULT_OPTIONS: {
-    headers: {
-      'Accept': 'application/json',
-    },
-  }
-};
 
-// Sistema de caché simple
-const CACHE_DURATION = 60000; // 1 minuto
-const cache = new Map();
-
-const CACHE_DURATIONS = {
-  '1': 30000,    // 30 segundos para datos de 24h
-  '7': 60000,    // 1 minuto para datos de 7 días
-  '30': 300000,  // 5 minutos para datos de 30 días
-  '365': 900000, // 15 minutos para datos anuales
-};
-
-// Utilidades
-const createUrl = (endpoint, params = {}) => {
-  const url = new URL(`${API_CONFIG.BASE_URL}${endpoint}`);
-  const allParams = { ...API_CONFIG.DEFAULT_PARAMS, ...params };
-  Object.keys(allParams).forEach(key => 
-    url.searchParams.append(key, allParams[key])
-  );
-  return url;
-};
-
-const fetchWithCache = async (key, fetchFn) => {
-  const cached = cache.get(key);
-  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-    return cached.data;
-  }
-  
-  const data = await fetchFn();
-  cache.set(key, { data, timestamp: Date.now() });
-  return data;
-};
-
-const handleApiResponse = async (response) => {
-  if (!response.ok) {
-    const errorMessage = `Error: ${response.status} - ${response.statusText}`;
-    throw new Error(errorMessage);
-  }
-
-  const data = await response.json();
-  return data;
-};
-
-const handleApiError = (error, endpoint) => {
-  console.error(`Error in ${endpoint}:`, error);
-  if (error.response) {
-    throw new Error(`API Error (${endpoint}): ${error.response.status} - ${error.response.statusText}`);
-  } else if (error.request) {
-    throw new Error(`Network Error (${endpoint}): No response received`);
-  } else {
-    throw new Error(`Request Error (${endpoint}): ${error.message}`);
-  }
-};
 
 
 
@@ -82,7 +20,7 @@ export const formatPrice = (value) => {
   }).format(parsedValue);
 };
 
-const formatMarketCap = (value) => {
+export const formatMarketCap = (value) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -90,8 +28,6 @@ const formatMarketCap = (value) => {
     maximumFractionDigits: 2
   }).format(value);
 };
-
-
 
 
 

@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
-import { Link } from "react-scroll";
 import "./header.css";
 
-const Header = ({ name }) => {
+export const Header = () => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -33,40 +32,68 @@ const Header = ({ name }) => {
     },
   };
 
+  const handleScrollToMarket = () => {
+    const marketSection = document.querySelector("#market");
+    if (marketSection) {
+      marketSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.header
-      className="relative px-4 py-60 text-center overflow-hidden bg-zinc-900"
+      className="relative px-4 py-60 text-center overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      id={name}
+      id="header"
     >
-      {/* Elementos de luz de fondo */}
+      {/* Gradiente base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
+
+      {/* Elementos de luz de fondo mejorados */}
       <motion.div
-        className="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
+        className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/20 rounded-full blur-[120px]"
         animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.1, 0.2, 0.1],
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute -bottom-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"
+        className="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.3, 0.1],
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.5, 0.2],
         }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Efecto de "brillo" en movimiento */}
+      {/* Sparks adicionales */}
       <motion.div
-        className="absolute inset-0 opacity-10"
+        className="absolute top-1/4 right-1/4 w-48 h-48 bg-blue-500/30 rounded-full blur-[50px]"
+        animate={{
+          scale: [1, 1.5, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-purple-500/30 rounded-full blur-[50px]"
+        animate={{
+          scale: [1, 1.5, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Efecto de "brillo" en movimiento mejorado */}
+      <motion.div
+        className="absolute inset-0 opacity-20"
         animate={{
           background: [
-            "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 100% 100%, #3b82f6 0%, transparent 50%)",
-            "radial-gradient(circle at 100% 0%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 0% 100%, #3b82f6 0%, transparent 50%)",
-            "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 100% 100%, #3b82f6 0%, transparent 50%)",
+            "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 100% 100%, #a855f7 0%, transparent 50%)",
+            "radial-gradient(circle at 100% 0%, #a855f7 0%, transparent 50%), radial-gradient(circle at 0% 100%, #3b82f6 0%, transparent 50%)",
+            "radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 100% 100%, #a855f7 0%, transparent 50%)",
           ],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -89,7 +116,7 @@ const Header = ({ name }) => {
               variants={itemVariants}
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-blue-600/20 to-blue-500/20 rounded-2xl blur-2xl"></div>
-              <span className="relative py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-600 animate-gradient">
+              <span className="relative py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 animate-gradient">
                 your favorite crypto
               </span>
             </motion.span>
@@ -109,11 +136,20 @@ const Header = ({ name }) => {
             className="mb-4 flex justify-center"
             variants={itemVariants}
           >
-            <Link to="market" spy={true} smooth={true} duration={500}>
-              <button className="px-8 py-2 text-sm font-medium text-blue-400 bg-blue-500/10 backdrop-filter backdrop-blur-sm rounded-lg border border-blue-400/20 shadow-lg hover:bg-blue-500/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-                Try Demo
-              </button>
-            </Link>
+            <motion.button
+              onClick={handleScrollToMarket}
+              className="glow-button px-8 py-2 text-sm font-medium text-blue-400 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-filter backdrop-blur-sm rounded-lg border border-blue-400/20 shadow-lg hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 ease-in-out transform"
+              whileHover={{
+                scale: 1.1,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeInOut",
+                },
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              Try Demo
+            </motion.button>
           </motion.div>
         </div>
       </motion.div>
